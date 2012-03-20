@@ -7,6 +7,7 @@ filetype plugin indent on  " enable loading indent file for filetype
 
 " settings
 " basic
+set noswapfile " do not create swap files
 set nocompatible " not compatible with vi
 " indentation
 set backupdir=~/.vim/tmp/backup,.
