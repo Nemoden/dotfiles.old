@@ -8,3 +8,5 @@
 [alias]
 	st = status
 	co = checkout
+[format]
+	pretty = %Cgreen%h%Creset %ad %C(yellow)%s%Creset %x09%an, %ar %Cred%x09%d
