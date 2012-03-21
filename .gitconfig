@@ -9,4 +9,4 @@
 	st = status
 	co = checkout
 [format]
-	pretty = %Cgreen%h%Creset %ad %C(yellow)%s%Creset %x09%an, %ar %Cred%x09%d
+	pretty = %Cgreen%h%Creset %ad, %ar%x09by %an%x09%C(yellow)%s%Creset%x09%Cred%d
