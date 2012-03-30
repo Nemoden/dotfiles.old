@@ -51,7 +51,7 @@ let g:CommandTMaxFiles=40000
 let g:pyflakes_use_quickfix = 0
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
-set completeopt = menuone,longest,preview
+set completeopt=menuone,longest,preview
 map <leader>j :RopeGotoDefinition<CR>
 map <leader>r :RopeRename<CR>
 nmap <leader>a <Esc>:Ack!
