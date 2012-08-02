@@ -5,6 +5,8 @@ syntax on                  " syntax highlighing
 filetype on                " try to detect filetypes
 filetype plugin indent on  " enable loading indent file for filetype
 
+
+
 source ~/.vim/russian_support.vim
 
 " settings
@@ -32,6 +34,7 @@ set statusline=%<%f%h%m%r\ %b\ %{&encoding}\ 0x\ \ %l,%c%V\ %P
 set laststatus=2
 set smartindent
 set sessionoptions=curdir,buffers,tabpages
+set cursorline
 set incsearch " search while typing 
 set hlsearch " highlight search
 set nu " set lines numbers
@@ -47,9 +50,12 @@ map <F6> :GundoToggle<CR>
 map <F3> :CommandT<Return>
 
 let g:CommandTMaxFiles=40000
+let g:CommandTMaxHeight=10
 
 let g:pyflakes_use_quickfix = 0
 au FileType python set omnifunc=pythoncomplete#Complete
+au FileType php set omnifunc=phpcomplete#CompletePHP
+au BufNewFile,BufRead,BufEnter,FileType *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 map <leader>j :RopeGotoDefinition<CR>
@@ -84,11 +90,11 @@ map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
 " {{{ Locale settings
 " if we have BOM => this is BOM
 if &fileencodings !~? "ucs-bom"
-	set fileencodings^=ucs-bom
+  set fileencodings^=ucs-bom
 endif
 if &fileencodings !~? "utf-8"
-	let g:added_fenc_utf8 = 1
-	set fileencodings+=utf-8
+  let g:added_fenc_utf8 = 1
+  set fileencodings+=utf-8
 endif
 if &fileencodings !~? "default"
 set fileencodings+=default
@@ -128,3 +134,11 @@ map <C-a> :VCSAdd <Return>
 map <F2> :NERDTreeToggle <Return>
 
 source ~/.vim/abbreviations
+
+" open vimrc on leader-vimrc
+map <leader>vimrc :e ~/.vimrc<cr>
+"autocmd bufwritepleader-vimrcost .vimrc :source $MYVIMRC
+
+" highlight text if it's length exceeds 80 symbols
+highlight OverLength ctermbg=red ctermfg=white guibg=#8A4040
+match OverLength /\%>80v.\+/
