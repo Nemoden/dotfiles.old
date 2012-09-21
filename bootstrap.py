@@ -1,23 +1,22 @@
-from pprint import pprint
 import os
 import sys
 import getopt
-#import platform
 
 dotfiles_path = os.path.realpath( os.path.dirname(__file__) )
 homedir = os.path.expanduser('~')
 
 # exchange information with user
 answer = None
-for file in os.listdir(dotfiles_path):
-  if file ==  __file__:
+for filename in os.listdir(dotfiles_path):
+  if filename ==  __file__:
     continue
   else:
     pass
-  source = os.path.join(dotfiles_path, file)
-  target = os.path.join(homedir,'temp',file)
+  source = os.path.join(dotfiles_path, filename)
+  target = os.path.join(homedir,filename)
   try:
     os.symlink(source, target)
+    print 'I am creating a symlink from', source, 'to', target
   except IOError as exc:
     pass
   except OSError as exc:
