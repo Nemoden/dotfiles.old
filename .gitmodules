@@ -1,0 +1,6 @@
+[submodule ".vim/bundle/commandt"]
+	path = .vim/bundle/commandt
+	url = https://github.com/wincent/Command-T.git
+[submodule ".vim/bundle/surround"]
+	path = .vim/bundle/surround
+	url = https://github.com/tpope/vim-surround.git
