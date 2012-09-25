@@ -30,8 +30,10 @@ set novisualbell
 set t_vb =
 set hidden " dont output buffer if switching to other buffer thus we dont save this file to edit other file
 set mousehide " dont show mouse while entering text
-set statusline=%<%f%h%m%r\ %b\ %{&encoding}\ 0x\ \ %l,%c%V\ %P 
 set laststatus=2
+" let g:git_branch_status_head_current=1
+let g:git_branch_status_nogit="nogit"
+set statusline=%<%f%h%m%r\ %{GitBranchInfoString()}\ %b\ %{&encoding}\ 0x\ \ %l,%c%V\ %P 
 set smartindent
 set sessionoptions=curdir,buffers,tabpages
 set cursorline

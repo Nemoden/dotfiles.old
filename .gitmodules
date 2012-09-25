@@ -10,3 +10,6 @@
 [submodule ".vim/bundle/snipmate"]
 	path = .vim/bundle/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
+[submodule ".vim/bundle/gitbranchinfo"]
+	path = .vim/bundle/gitbranchinfo
+	url = https://github.com/taq/vim-git-branch-info.git
