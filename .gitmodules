@@ -13,3 +13,12 @@
 [submodule ".vim/bundle/gitbranchinfo"]
 	path = .vim/bundle/gitbranchinfo
 	url = https://github.com/taq/vim-git-branch-info.git
+[submodule "/home/nemoden/.vim/bundle/gundo"]
+	path = /home/nemoden/.vim/bundle/gundo
+	url = http://github.com/sjl/gundo.vim.git
+[submodule ".vim/bundle/supertab"]
+	path = .vim/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule ".vim/bundle/minibufexpl"]
+	path = .vim/bundle/minibufexpl
+	url = https://github.com/fholgado/minibufexpl.vim
