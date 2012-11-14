@@ -7,7 +7,7 @@ homedir = os.path.expanduser('~')
 # exchange information with user
 answer = None
 for filename in os.listdir(dotfiles_path):
-  if filename in  (__file__, '.gitmodules', '.git'):
+  if filename in  (__file__, '.gitmodules', '.git', 'README.md'):
     continue
   else:
     pass
