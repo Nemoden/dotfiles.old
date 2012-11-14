@@ -1,5 +1,5 @@
 " vim: syntax=vim:
-:ab atau @author Kirill "Nemoden" K
+:ab atau @author Kirill "Nemoden" K <kovalchuk@drom.ru>
 :ab spf sprintf
 :ab pf printf
 :ab -*- -*- coding: utf-8 -*-

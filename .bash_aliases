@@ -1,0 +1,5 @@
+alias virtualenv="/opt/python/bin/virtualenv"
+alias venv="virtualenv"
+alias play="cd /var/www/play"
+alias j="jobs"
+alias k="kill"

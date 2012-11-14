@@ -6,8 +6,15 @@ filetype on                " try to detect filetypes
 filetype plugin indent on  " enable loading indent file for filetype
 
 
+let g:file_template_default = {}
+let g:file_template_default['php'] = 'template'
+
 
 source ~/.vim/russian_support.vim
+
+" / is not handy since disposition on different keyboards differs and 
+" sometimes it's hard to strech pinky to reach leader /
+let mapleader=","
 
 " settings
 " basic
@@ -53,6 +60,8 @@ map <F3> :CommandT<Return>
 
 let g:CommandTMaxFiles=40000
 let g:CommandTMaxHeight=10
+
+autocmd BufNewFile,BufRead *.php_tmpl
 
 let g:pyflakes_use_quickfix = 0
 au FileType python set omnifunc=pythoncomplete#Complete
@@ -130,9 +139,19 @@ sil exe ":call setline(linenum, newline)"
 endfunction
 
 " SVN Commands go here:
-map <C-e> :VCSUpdate <Return>
-map <C-q> :VCSCommit <C-R>=expand("%:p:t")<CR>
-map <C-a> :VCSAdd <Return>
+" Ctrl + Q,E,A do not work in terminal
+if has("hui_running")
+  map <C-e> :VCSUpdate <Return>
+  "map <C-q> :VCSCommit <C-R>=expand("%:p:t")<CR>
+  map <C-q> :VCSCommit <C-R>=expand("%")<CR>
+  map <C-a> :VCSAdd <Return>
+endif
+" this bindings should work either way
+"map <leader>q :VCSCommit <C-R>=expand("%:p:t")<CR>
+map <leader>q :VCSCommit <C-R>=expand("%")<CR>
+map <leader>e :VCSUpdate <Return>
+map <leader>a :VCSAdd <Return>
+
 map <F2> :NERDTreeToggle <Return>
 
 source ~/.vim/abbreviations

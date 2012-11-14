@@ -1,0 +1,9 @@
+*.swo
+*\.swp
+*\.swn
+*\.project
+*\.settings
+*\.buildpath
+*tags
+*/tags
+gmon.out
