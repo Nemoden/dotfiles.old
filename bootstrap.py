@@ -1,6 +1,5 @@
 import os
 import sys
-import getopt
 
 dotfiles_path = os.path.realpath( os.path.dirname(__file__) )
 homedir = os.path.expanduser('~')
@@ -8,7 +7,7 @@ homedir = os.path.expanduser('~')
 # exchange information with user
 answer = None
 for filename in os.listdir(dotfiles_path):
-  if filename in  [__file__, '.gitmodules', '.git']:
+  if filename in  (__file__, '.gitmodules', '.git'):
     continue
   else:
     pass
@@ -33,13 +32,15 @@ for filename in os.listdir(dotfiles_path):
             break 
       if answer in ['allyes', 'yes']:
         print "I'm gladly obey, my master"
-        print 'Im unlinking', target
+        print "I'm unlinking", target
         os.unlink(target)
-        print 'Im creating new link to ', target, 'from', source
+        print "I'm creating new link to ", target, 'from', source
         os.symlink(source, target)
+        if answer == 'yes':
+          answer = None
       elif answer in ['allno', 'no']:
-        print 'I dont do anythin'
-        pass
-    pass
+        print "Ok, I will not do it"
+        if answer == 'no':
+          answer = None
   finally:
     pass
