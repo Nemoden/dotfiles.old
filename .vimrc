@@ -64,7 +64,7 @@ let g:CommandTMaxHeight=10
 autocmd BufNewFile,BufRead *.php_tmpl
 
 let g:pyflakes_use_quickfix = 0
-au FileType python set omnifunc=pythoncomplete#Complete
+au FileType python setlocal omnifunc=pythoncomplete#Complete sw=4 ts=8 sts=4 smartindent
 au FileType php set omnifunc=phpcomplete#CompletePHP
 au BufNewFile,BufRead,BufEnter,FileType *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 let g:SuperTabDefaultCompletionType = "context"
