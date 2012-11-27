@@ -4,6 +4,7 @@ call pathogen#runtime_append_all_bundles()
 syntax on                  " syntax highlighing
 filetype on                " try to detect filetypes
 filetype plugin indent on  " enable loading indent file for filetype
+filetype plugin on  " enable loading indent file for filetype
 
 
 let g:file_template_default = {}
