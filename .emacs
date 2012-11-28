@@ -11,7 +11,7 @@
 (require 'org-install)
 
 ; treat .org files as org-mode files
-(add-to-list 'auto-mode-alist '("\\.org\\".org-mode))
+(add-to-list 'auto-mode-alist '("\\.org'".org-mode))
 
 ; org shortcuts
 (global-set-key "\C-cl" 'org-store-link)
@@ -21,7 +21,7 @@
 ; if holding cursor under the header
 (setq org-todo-keywords
   '(
-    (sequence "TODO" "WAIT" "|" "DONE")
+    (sequence "TODO(t!)" "WAIT(w!)" "PROC(p!)" "|" "DONE(d!)")
     (sequence "ANLZ" "FDEV" "CTST" "RDEV" "UTST" "|" "CNCL" "TRNS")
   )
 )
@@ -31,9 +31,13 @@
   '(
     ("TODO".(:foreground "red" :weight bold))
     ("WAIT".(:foreground "orange" :weight bold))
+    ("PROC".(:foreground "yellow" :weight bold))
     ("DONE".(:foreground "green" :weight bold))
   )
 )
+
+; tags
+(setq org-tag-alist '(("work" . ?w) ("home" . ?h) ("tobuy" . ?b) ("toread" . ?r)))
 
 ; we just need this. nobody knows why
 (global-font-lock-mode 1)
