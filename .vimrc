@@ -41,7 +41,7 @@ set mousehide " dont show mouse while entering text
 set laststatus=2
 " let g:git_branch_status_head_current=1
 let g:git_branch_status_nogit="nogit"
-set statusline=%<%f%h%m%r\ %{fugitive#statusline()}\ %b\ %{&encoding}\ 0x\ \ %l,%c%V\ %P 
+set statusline=%<%f%h%m%r\ %y\ %{fugitive#statusline()}\ %b\ ENC\:\ %{&encoding}\ TERM\:\ %{&termencoding}\ BUFNO\:\ %n\ %l,%c%V\ %P 
 set smartindent
 set sessionoptions=curdir,buffers,tabpages
 set cursorline
