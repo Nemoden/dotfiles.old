@@ -1,13 +1,18 @@
+; load color theme
+; download color theme from here: http://download.savannah.gnu.org/releases/color-theme/
+(add-to-list 'load-path "~/.emacs.d/nemoden/color-theme-6.6.0/")
+
 ; default files settings
 (custom-set-variables
-  '(org-agenda-files (quote ("~/Dropbox/org")))
-  '(org-default-notes-file "~/Dropbox/org/notes.org")
-  '(org-directory "~/Dropbox/org")
+  '(org-agenda-files (quote ("~/Dropbox/org"))) ; search files for agenda in ~/Dropbox/org dir
+  '(org-default-notes-file "~/Dropbox/org/notes.org") ; I've got no idea why I need this
+  '(org-directory "~/Dropbox/org") ; org directory. Don't know why I need this eather
 )
 
+; install org mode
 (require 'org-install)
 
-; treat .org files as org-mode files
+; associate .org files with emacs org-mode
 (add-to-list 'auto-mode-alist '("\\.org'".org-mode))
 
 ; org shortcuts
@@ -19,7 +24,6 @@
 (setq org-todo-keywords
   '(
     (sequence "TODO(t!)" "PROC(p!)" "WAIT(w!)" "|" "DONE(d!)")
-    ;(sequence "ANLZ" "FDEV" "CTST" "RDEV" "UTST" "|" "CNCL" "TRNS")
   )
 )
 
@@ -43,12 +47,24 @@
 ; (require 'mercurial)
 
 ; color theme
-;(require 'color-theme)
-;(color-theme-initialize)
-;(color-theme-charcoal-black)
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-charcoal-black)
 
 ; access org file using M-x myorg
 (defun myorg()
   (interactive)
   (find-file "~/Dropbox/org/default.org")
+)
+
+; access links file using M-x mylinks
+(defun mylinks()
+  (interactive)
+  (find-file "~/Dropbox/org/links.org")
+)
+
+; access notes file using M-x mynotes
+(defun mynotes()
+  (interactive)
+  (find-file "~/Dropbox/org/notes.org")
 )
