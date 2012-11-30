@@ -1,10 +1,7 @@
-; all settings are inherited and adopted from this habr post:
-; @link http://habrahabr.ru/post/28098/
-
 ; default files settings
 (custom-set-variables
-  '(org-agenda-files (quote ("~/Dropbox/agenda.org")))
-  '(org-default-notes-file "~/Dropbox/notes.org")
+  '(org-agenda-files (quote ("~/Dropbox/org")))
+  '(org-default-notes-file "~/Dropbox/org/notes.org")
   '(org-directory "~/Dropbox/org")
 )
 
@@ -21,8 +18,8 @@
 ; if holding cursor under the header
 (setq org-todo-keywords
   '(
-    (sequence "TODO(t!)" "WAIT(w!)" "PROC(p!)" "|" "DONE(d!)")
-    (sequence "ANLZ" "FDEV" "CTST" "RDEV" "UTST" "|" "CNCL" "TRNS")
+    (sequence "TODO(t!)" "PROC(p!)" "WAIT(w!)" "|" "DONE(d!)")
+    ;(sequence "ANLZ" "FDEV" "CTST" "RDEV" "UTST" "|" "CNCL" "TRNS")
   )
 )
 
