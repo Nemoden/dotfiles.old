@@ -68,3 +68,13 @@
   (interactive)
   (find-file "~/Dropbox/org/notes.org")
 )
+
+(defun myquotes()
+  (interactive)
+  (find-file "~/Dropbox/org/quotes.org")
+)
+
+(defun mycredos()
+  (interactive)
+  (find-file "~/Dropbox/org/credos.org")
+)
