@@ -73,8 +73,3 @@
   (interactive)
   (find-file "~/Dropbox/org/quotes.org")
 )
-
-(defun mycredos()
-  (interactive)
-  (find-file "~/Dropbox/org/credos.org")
-)
