@@ -69,7 +69,14 @@
   (find-file "~/Dropbox/org/notes.org")
 )
 
+; quotes
 (defun myquotes()
   (interactive)
   (find-file "~/Dropbox/org/quotes.org")
+)
+
+; ideas
+(defun myideas()
+  (interactive)
+  (find-file "~/Dropbox/org/ideas.org")
 )
