@@ -38,7 +38,7 @@
 )
 
 ; tags
-(setq org-tag-alist '(("work" . ?w) ("home" . ?h) ("tobuy" . ?b) ("toread" . ?r)))
+(setq org-tag-alist '(("work" . ?w) ("home" . ?h) ("tobuy" . ?b) ("toread" . ?r) ("towatch" . ?v) ("personal" . ?p)))
 
 ; we just need this. nobody knows why
 (global-font-lock-mode 1)

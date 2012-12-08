@@ -1,3 +1,6 @@
+*.o
+*.pyc
+*.pyo
 tmp
 tags
 .netrwhist
