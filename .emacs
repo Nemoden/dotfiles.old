@@ -80,3 +80,9 @@
   (interactive)
   (find-file "~/Dropbox/org/ideas.org")
 )
+
+; learning.org
+(defun mylearning()
+  (interactive)
+  (find-file "~/Dropbox/org/learning.org")
+)
