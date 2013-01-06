@@ -6,6 +6,8 @@ filetype on                " try to detect filetypes
 filetype plugin indent on  " enable loading indent file for filetype
 filetype plugin on  " enable loading indent file for filetype
 
+let ropevim_vim_completion=1
+
 
 let g:file_template_default = {}
 let g:file_template_default['php'] = 'template'
