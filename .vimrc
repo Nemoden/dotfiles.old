@@ -1,6 +1,7 @@
 filetype off
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
+"call pathogen#infect()
 syntax on                  " syntax highlighing
 filetype on                " try to detect filetypes
 filetype plugin indent on  " enable loading indent file for filetype
