@@ -6,7 +6,6 @@ filetype on                " try to detect filetypes
 filetype plugin indent on  " enable loading indent file for filetype
 filetype plugin on  " enable loading indent file for filetype
 
-let ropevim_vim_completion=1
 
 
 let g:file_template_default = {}
@@ -68,6 +67,7 @@ autocmd BufNewFile,BufRead *.php_tmpl
 
 let g:pyflakes_use_quickfix = 0
 au FileType python setlocal omnifunc=pythoncomplete#Complete sw=4 ts=8 sts=4 smartindent
+let ropevim_vim_completion=1
 au FileType php set omnifunc=phpcomplete#CompletePHP
 au BufNewFile,BufRead,BufEnter,FileType *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 let g:SuperTabDefaultCompletionType = "context"
