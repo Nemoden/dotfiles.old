@@ -31,3 +31,6 @@
 [submodule ".vim/bundle/pythoncomplete"]
 	path = .vim/bundle/pythoncomplete
 	url = https://github.com/vim-scripts/pythoncomplete.git
+[submodule ".vim/bundle/vimflake8"]
+	path = .vim/bundle/vimflake8
+	url = https://github.com/nvie/vim-flake8.git
