@@ -34,3 +34,12 @@
 [submodule ".vim/bundle/vimflake8"]
 	path = .vim/bundle/vimflake8
 	url = https://github.com/nvie/vim-flake8.git
+[submodule ".vim/bundle/ropevim"]
+	path = .vim/bundle/ropevim
+	url = https://github.com/sontek/rope-vim.git
+[submodule ".vim/bundle/vimflake8"]
+	path = .vim/bundle/vimflake8
+	url = https://github.com/nvie/vim-flake8.git
+[submodule ".vim/bundle/syntactic"]
+	path = .vim/bundle/syntactic
+	url = https://github.com/scrooloose/syntastic.git

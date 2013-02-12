@@ -86,3 +86,9 @@
   (interactive)
   (find-file "~/Dropbox/org/learning.org")
 )
+
+; mymotivation
+(defun mymotivation()
+  (interactive)
+  (find-file "~/Dropbox/org/mymotivation.org")
+)
