@@ -1,13 +1,15 @@
 filetype off
+"call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
-"call pathogen#infect()
 syntax on                  " syntax highlighing
 filetype on                " try to detect filetypes
 filetype plugin indent on  " enable loading indent file for filetype
 filetype plugin on  " enable loading indent file for filetype
 
-
+" Syntax checkers
+map ,sc :SyntasticCheck
+let g:syntactic_python_checkers=['pyflakes']
 
 let g:file_template_default = {}
 let g:file_template_default['php'] = 'template'
