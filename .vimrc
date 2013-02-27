@@ -77,6 +77,7 @@ set completeopt=menuone,longest,preview
 map <leader>j :RopeGotoDefinition<CR>
 map <leader>r :RopeRename<CR>
 nmap <leader>a <Esc>:Ack!
+map <leader>k :bd<CR>
 " integration with git
 "%{fugitive#statusline()}
 
