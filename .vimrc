@@ -10,6 +10,7 @@ filetype plugin on  " enable loading indent file for filetype
 " Syntax checkers
 map ,sc :SyntasticCheck
 let g:syntactic_python_checkers=['pyflakes']
+let g:syntactic_javascript_checkers=['jslint']
 
 let g:file_template_default = {}
 let g:file_template_default['php'] = 'template'
