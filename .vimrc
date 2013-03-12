@@ -170,5 +170,5 @@ map <leader>vimrc :e ~/.vimrc<cr>
 "autocmd bufwritepleader-vimrcost .vimrc :source $MYVIMRC
 
 " highlight text if it's length exceeds 80 symbols
-highlight OverLength ctermbg=red ctermfg=white guibg=#8A4040
-match OverLength /\%>80v.\+/
+" highlight OverLength ctermbg=red ctermfg=white guibg=#8A4040
+" match OverLength /\%>80v.\+/
