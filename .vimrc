@@ -1,5 +1,6 @@
 filetype off
 "call pathogen#runtime_append_all_bundles()
+let g:syntastic_javascript_jslint_conf = '--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars --indent'
 call pathogen#infect()
 call pathogen#helptags()
 syntax on                  " syntax highlighing
@@ -9,8 +10,11 @@ filetype plugin on  " enable loading indent file for filetype
 
 " Syntax checkers
 map ,sc :SyntasticCheck
-let g:syntactic_python_checkers=['pyflakes']
-let g:syntactic_javascript_checkers=['jslint']
+let g:syntastic_python_checkers=['pyflakes']
+let g:syntastic_javascript_checkers=['jslint']
+let g:syntastic_mode_map = { 'mode': 'active',
+      \ 'active_filetypes': ['ruby', 'php'],
+      \ 'passive_filetypes': ['puppet'] }
 
 let g:file_template_default = {}
 let g:file_template_default['php'] = 'template'
@@ -32,11 +36,11 @@ set directory=~/.vim/tmp/swap,.
 set foldmethod=indent
 set foldlevel=99
 set modeline "read per-file settings
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set smarttab
 set expandtab
-set softtabstop=2
+set softtabstop=4
 set autoindent
 set scrolloff=9
 set novisualbell
@@ -128,7 +132,7 @@ endif
 let Tlist_Ctags_Cmd = "/usr/bin/ctags"
 let Tlist_WinWidth = 50
 map <F4> :TlistToggle<cr>
-map <F9> :!/usr/bin/ctags -R --PHP-kinds=cfiv --fields=+iaS --extra=+q --exclude=".svn" --exclude=".js" --exclude=".css" --regex-PHP="/(abstract)?\s+class\s+([^ ]+)/\2/c/" --regex-PHP="/(static\|abstract\|public\|protected\|private)\s+(final\s+)?function\s+(\&\s+)?([^ (]+)/\4/f/" --regex-PHP="/interface\s+([^ ]+)/\1/i/" --regex-PHP="/\$([a-zA-Z_][a-zA-Z0-9_]*)/\1/v/" .<CR>
+map <F9> :!/usr/bin/ctags -R --PHP-kinds=cfiv --fields=+iaS --extra=+q --exclude=".svn" --exclude="*.js" --exclude="*.css" --regex-PHP="/(abstract)?\s+class\s+([^ ]+)/\2/c/" --regex-PHP="/(static\|abstract\|public\|protected\|private)\s+(final\s+)?function\s+(\&\s+)?([^ (]+)/\4/f/" --regex-PHP="/interface\s+([^ ]+)/\1/i/" --regex-PHP="/\$([a-zA-Z_][a-zA-Z0-9_]*)/\1/v/" .<CR>
 
 set fileencodings=cp1251,utf-8,koi8-r,cp866
 
@@ -169,6 +173,11 @@ source ~/.vim/abbreviations
 " open vimrc on leader-vimrc
 map <leader>vimrc :e ~/.vimrc<cr>
 "autocmd bufwritepleader-vimrcost .vimrc :source $MYVIMRC
+function! GetPwd()
+  return system('pwd')
+endfunction
+map <leader>fcd :cd %:h<cr>:pwd<cr>
+map <leader>cd :call GetPwd()<cr>:pwd<cr>
 
 " highlight text if it's length exceeds 80 symbols
 " highlight OverLength ctermbg=red ctermfg=white guibg=#8A4040
