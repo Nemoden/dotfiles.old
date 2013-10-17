@@ -1,4 +1,4 @@
-alias virtualenv="/opt/python/bin/virtualenv"
+#alias virtualenv="/opt/python/bin/virtualenv"
 alias venv="virtualenv"
 alias play="cd /var/www/play"
 alias j="jobs"

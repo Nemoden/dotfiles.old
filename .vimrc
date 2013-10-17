@@ -54,6 +54,7 @@ set incsearch " search while typing
 set hlsearch " highlight search
 set nu " set lines numbers
 set ic " ignore case in searches
+set wildignore+=*.pyc,env/** " ignore pyc files and files in env dir
 
 " background settings
 set background=dark
