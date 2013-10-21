@@ -43,3 +43,6 @@
 [submodule ".vim/bundle/syntactic"]
 	path = .vim/bundle/syntactic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule ".vim/bundle/colorschemes"]
+	path = .vim/bundle/colorschemes
+	url = git@github.com:flazz/vim-colorschemes.git
