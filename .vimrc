@@ -59,9 +59,10 @@ set hlsearch " highlight search
 set nu " set lines numbers
 set ic " ignore case in searches
 
+set t_Co=256
 " background settings
 set background=dark
-colorscheme wombat
+colorscheme xoria256 " wombat
 
 set guifont=DejaVu\ Sans\ Mono\ 10
 map <leader>td <Plug>TaskList
