@@ -50,7 +50,7 @@ set mousehide " dont show mouse while entering text
 set laststatus=2
 " let g:git_branch_status_head_current=1
 let g:git_branch_status_nogit="nogit"
-set statusline=%<%f%h%m%r\ [:b%n]\ %y\ %{fugitive#statusline()}\ %b\ ENC\:\ %{&encoding}\ TERM\:\ %{&termencoding}\ %l,%c%V\ %P 
+set statusline=[%{getcwd()}]\ %<%f%h%m%r\ [:b%n]\ %y\ %{fugitive#statusline()}\ %b\ ENC\:\ %{&encoding}\ TERM\:\ %{&termencoding}\ %l,%c%V\ %P 
 set smartindent
 set sessionoptions=curdir,buffers,tabpages
 set cursorline
@@ -60,9 +60,10 @@ set nu " set lines numbers
 set ic " ignore case in searches
 set wildignore+=*.pyc,env/** " ignore pyc files and files in env dir
 
+set t_Co=256
 " background settings
 set background=dark
-colorscheme wombat
+colorscheme xoria256 " wombat
 
 set guifont=DejaVu\ Sans\ Mono\ 10
 map <leader>td <Plug>TaskList
