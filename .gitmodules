@@ -9,7 +9,7 @@
 	url = http://github.com/tpope/vim-fugitive.git
 [submodule ".vim/bundle/snipmate"]
 	path = .vim/bundle/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
+    url = https://github.com/ervandew/snipmate.vim.git
 [submodule ".vim/bundle/gitbranchinfo"]
 	path = .vim/bundle/gitbranchinfo
 	url = https://github.com/taq/vim-git-branch-info.git
@@ -31,15 +31,12 @@
 [submodule ".vim/bundle/pythoncomplete"]
 	path = .vim/bundle/pythoncomplete
 	url = https://github.com/vim-scripts/pythoncomplete.git
-[submodule ".vim/bundle/vimflake8"]
-	path = .vim/bundle/vimflake8
-	url = https://github.com/nvie/vim-flake8.git
 [submodule ".vim/bundle/ropevim"]
 	path = .vim/bundle/ropevim
 	url = https://github.com/sontek/rope-vim.git
 [submodule ".vim/bundle/vimflake8"]
 	path = .vim/bundle/vimflake8
-	url = https://github.com/nvie/vim-flake8.git
+	url = http://github.com/nvie/vim-flake8.git
 [submodule ".vim/bundle/syntactic"]
 	path = .vim/bundle/syntactic
 	url = https://github.com/scrooloose/syntastic.git
