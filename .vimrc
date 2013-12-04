@@ -87,6 +87,7 @@ autocmd BufNewFile,BufRead *.php_tmpl
 
 let g:pyflakes_use_quickfix = 0
 au FileType python setlocal omnifunc=pythoncomplete#Complete sw=4 ts=8 sts=4 smartindent " omnifunc=pythoncomplete#Complete
+au FileType ruby setlocal sw=2 ts=2 sts=2 smartindent
 au FileType javascript setlocal sw=4 ts=8 sts=4 smartindent
 "let ropevim_vim_completion=1
 au FileType php set omnifunc=phpcomplete#CompletePHP
