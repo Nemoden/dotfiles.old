@@ -1,65 +1,76 @@
 filetype off
 "call pathogen#runtime_append_all_bundles()
-let g:syntastic_javascript_jslint_conf = '--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars --indent'
 call pathogen#infect()
 call pathogen#helptags()
-syntax on                  " syntax highlighing
 filetype on                " try to detect filetypes
 filetype plugin indent on  " enable loading indent file for filetype
 filetype plugin on  " enable loading indent file for filetype
+syntax on                  " syntax highlighing
 
-" Syntax checkers
-map ,sc :SyntasticCheck
-let g:syntastic_python_checkers=['pyflakes']
-let g:syntastic_javascript_checkers=['jslint']
-let g:syntastic_mode_map = { 'mode': 'active',
-      \ 'active_filetypes': ['ruby', 'php'],
-      \ 'passive_filetypes': ['puppet'] }
-
-let g:file_template_default = {}
-let g:file_template_default['php'] = 'template'
-
-
+" add Russian support 
 source ~/.vim/russian_support.vim
 
 " / is not handy since disposition on different keyboards differs and 
 " sometimes it's hard to strech pinky to reach leader /
-let mapleader=","
+let mapleader = ","
 
-" settings
-" basic
-set noswapfile " do not create swap files
-set nocompatible " not compatible with vi
-" indentation
+" Syntax checkers
+map <leader>sc :SyntasticCheck
+let g:syntastic_python_checkers=['flake8','pyflakes']
+let g:syntastic_javascript_checkers=['jslint']
+let g:syntastic_javascript_jslint_conf = '--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars --indent'
+let g:syntastic_mode_map = { 'mode': 'active',
+      \ 'active_filetypes': ['ruby', 'php', 'python'],
+      \ 'passive_filetypes': ['puppet'] }
+
+" basic settings
+set t_Co=256                   " 256 colors terminal
+set noswapfile                 " do not create swap files
+set nocompatible               " not compatible with vi
+set foldmethod=indent          " equally indented lines are folded
+set foldlevel=8                " folding level
+set modeline                   " read per-file settings
+set tabstop=4                  " Number of spaces that a <Tab> in the file counts for
+set shiftwidth=4               " Number of spaces to use for each step of (auto)indent.
+                               " Used for 'cindent', >>, <<, etc.
+set expandtab                  " Use spaces instead of Tabs, insert a tab with Ctrl-V<Tab>
+set softtabstop=4
+" DONT SET! BREAKS SUPERTAB COMPLETION
+"set paste                      " 'textwidth' is set to 0
+                               " 'wrapmargin' is set               to 0
+                               " 'autoindent' is reset
+                               " 'smartindent' is reset
+                               " 'softtabstoptop' is set to 0
+                               " 'revins' is reset
+                               " 'ruler' is reset
+                               " 'showmatchtch' is reset
+                               " 'formatoptions' is used like it is empty
+set autoindent                 " Copy indent from current line when starting a new line
+                               " (typing <CR> in Insert mode or when using the o or O command)
+set scrolloff=9                " scroll if close to the beginning of the file or to the end
+set novisualbell               " do not make any noise
+set t_vb=                      " no visualbell
+set hidden                     " dont output buffer if switching to other buffer
+                               " thus we dont save this file to edit other file
+set mousehide                  " dont show mouse while entering text
+set laststatus=2               " 
+set smartindent
+set smarttab
+" set cindent " <- don't use this!
+set cursorline                 " highlight a line under the cursor
+set incsearch                  " search while typing 
+set hlsearch                   " highlight search
+set nu                         " set lines numbers
+set ic                         " ignore case in searches
+set sessionoptions=curdir,buffers,tabpages,help,resize,winsize " restore session
+set wildignore+=*.pyc,*.jpg,*.jpeg,env/** " ignore pyc files, images and files in env dir
 set backupdir=~/.vim/tmp/backup,.
 set directory=~/.vim/tmp/swap,.
-set foldmethod=indent
-set foldlevel=99
-set modeline "read per-file settings
-set tabstop=4
-set shiftwidth=4
-set smarttab
-set expandtab
-set softtabstop=4
-set autoindent
-set scrolloff=9
-set novisualbell
-set t_vb =
-set hidden " dont output buffer if switching to other buffer thus we dont save this file to edit other file
-set mousehide " dont show mouse while entering text
-set laststatus=2
-" let g:git_branch_status_head_current=1
-let g:git_branch_status_nogit="nogit"
 set statusline=[%{getcwd()}]\ %<%f%h%m%r\ [:b%n]\ %y\ %{fugitive#statusline()}\ %b\ ENC\:\ %{&encoding}\ TERM\:\ %{&termencoding}\ %l,%c%V\ %P 
-set smartindent
-set sessionoptions=curdir,buffers,tabpages
-set cursorline
-set incsearch " search while typing 
-set hlsearch " highlight search
-set nu " set lines numbers
-set ic " ignore case in searches
 
-set t_Co=256
+" Fugitive settings
+let g:git_branch_status_nogit="nogit"
+
 " background settings
 set background=dark
 colorscheme xoria256 " wombat
@@ -75,9 +86,10 @@ let g:CommandTMaxHeight=10
 autocmd BufNewFile,BufRead *.php_tmpl
 
 let g:pyflakes_use_quickfix = 0
-au FileType python setlocal omnifunc=pythoncomplete#Complete sw=4 ts=8 sts=4 smartindent
+au FileType python setlocal omnifunc=pythoncomplete#Complete sw=4 ts=8 sts=4 smartindent " omnifunc=pythoncomplete#Complete
+au FileType ruby setlocal sw=2 ts=2 sts=2 smartindent
 au FileType javascript setlocal sw=4 ts=8 sts=4 smartindent
-let ropevim_vim_completion=1
+"let ropevim_vim_completion=1
 au FileType php set omnifunc=phpcomplete#CompletePHP
 au BufNewFile,BufRead,BufEnter,FileType *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 let g:SuperTabDefaultCompletionType = "context"
@@ -182,3 +194,13 @@ map <leader>cd :call GetPwd()<cr>:pwd<cr>
 " highlight text if it's length exceeds 80 symbols
 " highlight OverLength ctermbg=red ctermfg=white guibg=#8A4040
 " match OverLength /\%>80v.\+/
+
+
+
+" Ctrl-Space for completions. Heck Yeah!
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+    \ "\<lt>C-n>" :
+    \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+    \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+    \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
