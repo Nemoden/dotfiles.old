@@ -13,3 +13,4 @@ alias k7="kill %7"
 alias k8="kill %8"
 alias k9="kill %9"
 alias k10="kill %10"
+alias noc='ssh kovalchuk@noc.drom.ru'
