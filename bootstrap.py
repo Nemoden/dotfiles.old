@@ -45,6 +45,6 @@ for filename in os.listdir(dotfiles_path):
             elif answer in ['allno', 'no']:
                 print "Ok, I will not do it"
                 if answer == 'no':
-                answer = None
+                    answer = None
     finally:
         pass

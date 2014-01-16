@@ -207,3 +207,4 @@ imap <C-@> <C-Space>
 
 " :w!! asks for sudo password to modify system files
 cmap w!! %!sudo tee > /dev/null %
+map <leader>af :Autoformat<CR><CR>
