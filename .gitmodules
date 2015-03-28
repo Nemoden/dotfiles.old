@@ -58,3 +58,6 @@
 [submodule ".vim/bundle/vim-go"]
 	path = .vim/bundle/vim-go
 	url = https://github.com/fatih/vim-go.git
+[submodule ".vim/bundle/taskpaper"]
+	path = .vim/bundle/taskpaper
+	url = https://github.com/davidoc/taskpaper.vim.git
