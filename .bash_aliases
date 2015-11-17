@@ -14,3 +14,7 @@ alias k8="kill %8"
 alias k9="kill %9"
 alias k10="kill %10"
 alias noc='ssh kovalchuk@noc.drom.ru'
+alias grep='LANG=C grep'
+alias n10='. ~/.nvm/nvm.sh && nvm use 0.10'
+alias n11='. ~/.nvm/nvm.sh && nvm use 0.11'
+alias n12='. ~/.nvm/nvm.sh && nvm use 0.12'

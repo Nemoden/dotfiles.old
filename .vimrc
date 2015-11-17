@@ -75,7 +75,7 @@ let g:git_branch_status_nogit="nogit"
 set background=dark
 colorscheme xoria256 " wombat
 
-set guifont=DejaVu\ Sans\ Mono\ 10
+set guifont=Monaco\ 10
 map <leader>td <Plug>TaskList
 map <F6> :GundoToggle<CR>
 map <F3> :CommandT<Return>
