@@ -138,6 +138,7 @@ set fileencodings+=default
 endif
 " }}}
 
+:lan tim en_US.UTF-8
 :nnoremap <F5> "=strftime("%c")<CR>P
 :inoremap <F5> <C-R>=strftime("%c")<CR>
 
