@@ -43,9 +43,6 @@
 [submodule ".vim/bundle/vim-markdown-tpope"]
 	path = .vim/bundle/vim-markdown-tpope
 	url = https://github.com/tpope/vim-markdown.git
-[submodule "vim/bundle/phpautocomplete"]
-	path = vim/bundle/phpautocomplete
-	url = git://github.com/shawncplus/phpcomplete.vim.git
 [submodule ".vim/bundle/vim-autoformat"]
 	path = .vim/bundle/vim-autoformat
 	url = https://github.com/Chiel92/vim-autoformat.git
