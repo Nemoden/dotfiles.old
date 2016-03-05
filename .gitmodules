@@ -28,9 +28,6 @@
 [submodule ".vim/bundle/gundo"]
 	path = .vim/bundle/gundo
 	url = https://github.com/vim-scripts/Gundo.git
-[submodule ".vim/bundle/pythoncomplete"]
-	path = .vim/bundle/pythoncomplete
-	url = https://github.com/vim-scripts/pythoncomplete.git
 [submodule ".vim/bundle/vimflake8"]
 	path = .vim/bundle/vimflake8
 	url = http://github.com/nvie/vim-flake8.git
@@ -67,3 +64,12 @@
 [submodule ".vim/bundle/vim-php-cs-fixer"]
 	path = .vim/bundle/vim-php-cs-fixer
 	url = git@github.com:stephpy/vim-php-cs-fixer.git
+[submodule ".vim/bundle/kwdbi"]
+	path = .vim/bundle/kwdbi
+	url = https://github.com/vim-scripts/kwbdi.vim.git
+[submodule ".vim/bundle/vim-airline"]
+	path = .vim/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+[submodule ".vim/bundle/jedi-vim"]
+	path = .vim/bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git

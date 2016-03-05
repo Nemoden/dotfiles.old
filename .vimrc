@@ -16,7 +16,7 @@ let mapleader = ","
 
 " Syntax checkers
 map <leader>sc :SyntasticCheck
-let g:syntastic_python_checkers=['flake8','pyflakes']
+let g:syntastic_python_checkers=['flake8','pyflakes','python']
 let g:syntastic_javascript_checkers=['jslint']
 let g:syntastic_javascript_jslint_conf = '--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars --indent'
 let g:syntastic_mode_map = { 'mode': 'active',
@@ -84,9 +84,28 @@ let g:CommandTMaxFiles=40000
 let g:CommandTMaxHeight=10
 
 autocmd BufNewFile,BufRead *.php_tmpl
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
+            \ formatoptions=croqj softtabstop=4 textwidth=74 comments=:#\:,:#
+let python_highlight_all=1
+let python_highlight_exceptions=0
+let python_highlight_builtins=0
+let python_slow_sync=1
+
+" Don't warn on
+" "   E121 continuation line indentation is not a multiple of four
+" "   E128 continuation line under-indented for visual indent
+" "   E711 comparison to None should be 'if cond is not None:'
+" "   E301 expected 1 blank line, found 0
+" "   E261 at least two spaces before inline comment
+" "   E241 multiple spaces after ':'
+" "   E124 closing bracket does not match visual indentation
+" "   E126 continuation line over-indented for hanging indent
+" "   E721 do not compare types, use 'isinstance()'
+let g:syntastic_python_flake8_args='--ignore=E121,E128,E711,E301,E261,E241,E124,E126,E721
+ \ --max-line-length=84'
 
 let g:pyflakes_use_quickfix = 0
-au FileType python setlocal omnifunc=pythoncomplete#Complete sw=4 ts=8 sts=4 smartindent " omnifunc=pythoncomplete#Complete
+" au FileType python setlocal omnifunc=pythoncomplete#Complete sw=4 ts=8 sts=4 smartindent " omnifunc=pythoncomplete#Complete
 au FileType ruby setlocal sw=2 ts=2 sts=2 smartindent
 au FileType javascript setlocal sw=4 ts=8 sts=4 smartindent
 "let ropevim_vim_completion=1
