@@ -17,10 +17,14 @@ let mapleader = ","
 " Syntax checkers
 map <leader>sc :SyntasticCheck
 let g:syntastic_python_checkers=['flake8','pyflakes','python']
+let g:syntastic_php_checkers=['php']
 let g:syntastic_javascript_checkers=['jslint']
 let g:syntastic_javascript_jslint_conf = '--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars --indent'
+"let g:syntastic_mode_map = { 'mode': 'active',
+      "\ 'active_filetypes': ['ruby', 'php', 'python'],
+      "\ 'passive_filetypes': ['puppet'] }
 let g:syntastic_mode_map = { 'mode': 'active',
-      \ 'active_filetypes': ['ruby', 'php', 'python'],
+      \ 'active_filetypes': ['ruby', 'python'],
       \ 'passive_filetypes': ['puppet'] }
 
 " basic settings
@@ -70,6 +74,7 @@ set statusline=[%{getcwd()}]\ %<%f%h%m%r\ [:b%n]\ %y\ %{fugitive#statusline()}\ 
 
 " Fugitive settings
 let g:git_branch_status_nogit="nogit"
+let b:SuperTabDisabled = 1
 
 " background settings
 set background=dark
@@ -78,10 +83,12 @@ colorscheme xoria256 " wombat
 set guifont=Monaco\ 10
 map <leader>td <Plug>TaskList
 map <F6> :GundoToggle<CR>
-map <F3> :CommandT<Return>
+" map <F3> :CommandT<Return>
+map <F3> :CtrlP<Return>
 
-let g:CommandTMaxFiles=40000
-let g:CommandTMaxHeight=10
+" let g:CommandTMaxFiles=40000
+" let g:CommandTMaxHeight=10
+let g:ctrlp_max_files=40000
 
 autocmd BufNewFile,BufRead *.php_tmpl
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
@@ -109,7 +116,7 @@ let g:pyflakes_use_quickfix = 0
 au FileType ruby setlocal sw=2 ts=2 sts=2 smartindent
 au FileType javascript setlocal sw=4 ts=8 sts=4 smartindent
 "let ropevim_vim_completion=1
-au FileType php set omnifunc=phpcomplete#CompletePHP
+" au FileType php set omnifunc=phpcomplete#CompletePHP
 au BufNewFile,BufRead,BufEnter,FileType *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
