@@ -88,7 +88,7 @@ map <F3> :CtrlP<Return>
 
 " let g:CommandTMaxFiles=40000
 " let g:CommandTMaxHeight=10
-let g:ctrlp_max_files=100000
+let g:ctrlp_max_files=90000
 
 autocmd BufNewFile,BufRead *.php_tmpl
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
