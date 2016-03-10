@@ -7,10 +7,10 @@ filetype plugin indent on  " enable loading indent file for filetype
 filetype plugin on  " enable loading indent file for filetype
 syntax on                  " syntax highlighing
 
-" add Russian support 
+" add Russian support
 source ~/.vim/russian_support.vim
 
-" / is not handy since disposition on different keyboards differs and 
+" / is not handy since disposition on different keyboards differs and
 " sometimes it's hard to strech pinky to reach leader /
 let mapleader = ","
 
@@ -57,20 +57,22 @@ set t_vb=                      " no visualbell
 set hidden                     " dont output buffer if switching to other buffer
                                " thus we dont save this file to edit other file
 set mousehide                  " dont show mouse while entering text
-set laststatus=2               " 
+set laststatus=2               "
 set smartindent
 set smarttab
 " set cindent " <- don't use this!
 set cursorline                 " highlight a line under the cursor
-set incsearch                  " search while typing 
+set incsearch                  " search while typing
 set hlsearch                   " highlight search
 set nu                         " set lines numbers
 set ic                         " ignore case in searches
 set sessionoptions=curdir,buffers,tabpages,help,resize,winsize " restore session
-set wildignore+=*.pyc,*.jpg,*.jpeg,env/** " ignore pyc files, images and files in env dir
+set wildmenu
+set wildignore+=*.pyc,*.dll,*.o,*.bak,*.exe,*.jpg,*.jpeg,*.sublime-project,*.sublime-workspace
+set wildmode=list:full
 set backupdir=~/.vim/tmp/backup,.
 set directory=~/.vim/tmp/swap,.
-set statusline=[%{getcwd()}]\ %<%f%h%m%r\ [:b%n]\ %y\ %{fugitive#statusline()}\ %b\ ENC\:\ %{&encoding}\ TERM\:\ %{&termencoding}\ %l,%c%V\ %P 
+set statusline=[%{getcwd()}]\ %<%f%h%m%r\ [:b%n]\ %y\ %{fugitive#statusline()}\ %b\ ENC\:\ %{&encoding}\ TERM\:\ %{&termencoding}\ %l,%c%V\ %P
 
 " Fugitive settings
 let g:git_branch_status_nogit="nogit"
@@ -84,7 +86,7 @@ set guifont=Monaco\ 10
 map <leader>td <Plug>TaskList
 map <F6> :GundoToggle<CR>
 " map <F3> :CommandT<Return>
-map <F3> :CtrlP<Return>
+map <F3> ::CtrlPCurWD<Return>
 
 " let g:CommandTMaxFiles=40000
 " let g:CommandTMaxHeight=10
@@ -99,15 +101,15 @@ let python_highlight_builtins=0
 let python_slow_sync=1
 
 " Don't warn on
-" "   E121 continuation line indentation is not a multiple of four
-" "   E128 continuation line under-indented for visual indent
-" "   E711 comparison to None should be 'if cond is not None:'
-" "   E301 expected 1 blank line, found 0
-" "   E261 at least two spaces before inline comment
-" "   E241 multiple spaces after ':'
-" "   E124 closing bracket does not match visual indentation
-" "   E126 continuation line over-indented for hanging indent
-" "   E721 do not compare types, use 'isinstance()'
+"   E121 continuation line indentation is not a multiple of four
+"   E128 continuation line under-indented for visual indent
+"   E711 comparison to None should be 'if cond is not None:'
+"   E301 expected 1 blank line, found 0
+"   E261 at least two spaces before inline comment
+"   E241 multiple spaces after ':'
+"   E124 closing bracket does not match visual indentation
+"   E126 continuation line over-indented for hanging indent
+"   E721 do not compare types, use 'isinstance()'
 let g:syntastic_python_flake8_args='--ignore=E121,E128,E711,E301,E261,E241,E124,E126,E721
  \ --max-line-length=84'
 
@@ -115,13 +117,10 @@ let g:pyflakes_use_quickfix = 0
 " au FileType python setlocal omnifunc=pythoncomplete#Complete sw=4 ts=8 sts=4 smartindent " omnifunc=pythoncomplete#Complete
 au FileType ruby setlocal sw=2 ts=2 sts=2 smartindent
 au FileType javascript setlocal sw=4 ts=8 sts=4 smartindent
-"let ropevim_vim_completion=1
 " au FileType php set omnifunc=phpcomplete#CompletePHP
 au BufNewFile,BufRead,BufEnter,FileType *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
-map <leader>j :RopeGotoDefinition<CR>
-map <leader>r :RopeRename<CR>
 nmap <leader>a <Esc>:Ack!
 map <leader>k :bd<CR>
 " integration with git
@@ -176,7 +175,7 @@ map <F9> :!/usr/bin/ctags -R --PHP-kinds=cfiv --fields=+iaS --extra=+q --exclude
 set fileencodings=cp1251,utf-8,koi8-r,cp866
 
 menu Encoding.koi8-r :e ++enc=koi8-r ++ff=unix <CR> :set termencoding=unix <CR>
-menu Encoding.windows-1251 :e ++enc=cp1251 ++ff=unix <CR> :set termencoding=cp1251<CR> 
+menu Encoding.windows-1251 :e ++enc=cp1251 ++ff=unix <CR> :set termencoding=cp1251<CR>
 menu Encoding.cp866 :e ++enc=cp866 ++ff=unix <CR> :set termencoding=cp866 <CR>
 menu Encoding.utf-8 :e ++enc=utf8 <CR> :set termencoding=utf8 <CR>
 menu Encoding.koi8-u :e ++enc=koi8-u ++ff=unix <CR> :set termencoding=unix <CR>
@@ -184,10 +183,10 @@ let &termencoding = &encoding
 
 map <F8> :emenu Encoding.
 
-function! ReadFileName() 
-let l:linenum = search("^// *[Mm]odule","w") 
-let l:filename = getreg("%") 
-let l:newline = '// Module : '.filename 
+function! ReadFileName()
+let l:linenum = search("^// *[Mm]odule","w")
+let l:filename = getreg("%")
+let l:newline = '// Module : '.filename
 sil exe ":call setline(linenum, newline)"
 endfunction
 
