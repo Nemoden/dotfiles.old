@@ -73,3 +73,9 @@
 [submodule ".vim/bundle/ack.vim"]
 	path = .vim/bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim.git
+[submodule ".vim/bundle/vim-polyglot"]
+	path = .vim/bundle/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
+[submodule ".vim/bundle/vim-blade"]
+	path = .vim/bundle/vim-blade
+	url = git://github.com/jwalton512/vim-blade.git
