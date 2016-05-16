@@ -23,8 +23,10 @@ map <leader>sc :SyntasticCheck
 let g:syntastic_python_checkers=['flake8','pyflakes','python']
 let g:syntastic_php_checkers=['php', 'phpcs']
 let g:syntastic_php_phpcs_args='--encoding=utf-8 -s --standard=PSR2 --sniffs=Generic.ControlStructures.InlineControlStructure,Generic.Files.ByteOrderMark,Generic.Files.LineEndings,Generic.Files.LineLength,Generic.Formatting.DisallowMultipleStatements,Generic.Functions.FunctionCallArgumentSpacing,Generic.NamingConventions.UpperCaseConstantName,Generic.PHP.DisallowShortOpenTag,Generic.PHP.LowerCaseConstant,Generic.PHP.LowerCaseKeyword,Generic.WhiteSpace.DisallowTabIndent,Generic.WhiteSpace.ScopeIndent,PEAR.Functions.ValidDefaultValue,PSR1.Classes.ClassDeclaration,PSR2.Classes.ClassDeclaration,PSR2.ControlStructures.ControlStructureSpacing,PSR2.ControlStructures.ElseIfDeclaration,PSR2.ControlStructures.SwitchDeclaration,PSR2.Files.ClosingTag,PSR2.Files.EndFileNewline,PSR2.Namespaces.NamespaceDeclaration,PSR2.Namespaces.UseDeclaration,Squiz.Classes.ValidClassName,Squiz.ControlStructures.ControlSignature,Squiz.ControlStructures.ForEachLoopDeclaration,Squiz.ControlStructures.ForLoopDeclaration,Squiz.ControlStructures.LowercaseDeclaration,Squiz.Functions.FunctionDeclarationArgumentSpacing,Squiz.Functions.FunctionDeclaration,Squiz.Functions.LowercaseFunctionKeywords,Squiz.Functions.MultiLineFunctionDeclaration,Squiz.Scope.MethodScope,Squiz.WhiteSpace.ScopeClosingBrace,Squiz.WhiteSpace.ScopeKeywordSpacing,Squiz.WhiteSpace.SuperfluousWhitespace'
-let g:syntastic_javascript_checkers=['jslint']
-let g:syntastic_javascript_jslint_conf = '--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars --indent'
+" https://jaxbot.me/articles/setting-up-vim-for-react-js-jsx-02-03-2015
+let g:syntastic_javascript_checkers=['eslint']
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+" let g:syntastic_javascript_jslint_conf = '--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars --indent'
 "let g:syntastic_mode_map = { 'mode': 'active',
       "\ 'active_filetypes': ['ruby', 'php', 'python'],
       "\ 'passive_filetypes': ['puppet'] }
