@@ -2,3 +2,5 @@
 " Drom-specific VIM-commands
 
 map <leader>u :!phpunit --configuration=/var/www/auto/test/unit/phpunit.xml --bootstrap=/var/www/auto/test/unit/bootstrap.php %<Return>
+
+map <leader>md :!phpmd % text codesize,unusedcode,naming,design<Return>
