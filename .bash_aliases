@@ -19,3 +19,5 @@ alias n10='. ~/.nvm/nvm.sh && nvm use 0.10'
 alias n11='. ~/.nvm/nvm.sh && nvm use 0.11'
 alias n12='. ~/.nvm/nvm.sh && nvm use 0.12'
 alias docker='sudo docker'
+alias gst="git status"
+alias gco="git checkout"
