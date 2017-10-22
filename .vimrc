@@ -105,6 +105,7 @@ autocmd FileType php setlocal colorcolumn=121
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
             \ formatoptions=croqj softtabstop=4 textwidth=74 comments=:#\:,:#
 autocmd FileType yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 let python_highlight_all=1
 let python_highlight_exceptions=0
 let python_highlight_builtins=0
