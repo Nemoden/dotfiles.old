@@ -183,7 +183,7 @@ let Tlist_WinWidth = 50
 map <F4> :TlistToggle<cr>
 map <F9> :!/usr/bin/ctags -R --PHP-kinds=cfiv --fields=+iaS --extra=+q --exclude=".svn" --exclude="*.js" --exclude="*.css" --regex-PHP="/(abstract)?\s+class\s+([^ ]+)/\2/c/" --regex-PHP="/(static\|abstract\|public\|protected\|private)\s+(final\s+)?function\s+(\&\s+)?([^ (]+)/\4/f/" --regex-PHP="/interface\s+([^ ]+)/\1/i/" --regex-PHP="/\$([a-zA-Z_][a-zA-Z0-9_]*)/\1/v/" .<CR>
 
-set fileencodings=cp1251,utf-8,koi8-r,cp866
+set fileencodings=utf-8,cp1251,koi8-r,cp866
 
 menu Encoding.koi8-r :e ++enc=koi8-r ++ff=unix <CR> :set termencoding=unix <CR>
 menu Encoding.windows-1251 :e ++enc=cp1251 ++ff=unix <CR> :set termencoding=cp1251<CR>

@@ -2,7 +2,11 @@
 *.pyc
 *.pyo
 tmp
-tags
+./tags
 .netrwhist
 gmon.out
 env/
+.DS_Store
+.idea
+Desktop.ini
+.vscode

@@ -6,7 +6,7 @@
     remote = green
 [core]
     autocrlf = input
-    excludesfile = ~/.gitignore.global
+	excludesfile = /Users/kkovalchuk/.gitignore.global
     editor = vim
 [alias]
     st = status
@@ -28,7 +28,8 @@
     default = matching
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
     ;path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

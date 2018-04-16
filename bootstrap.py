@@ -32,7 +32,7 @@ for filename in os.listdir(dotfiles_path):
                 if answer is None or answer not in ['allyes', 'allno']:
                     answer = raw_input("Target file %s exists. Would you like to override it? [all]yes / [all]no " % target)
                     if answer in ['allyes', 'allno', 'yes','no']:
-                        break 
+                        break
 
             if answer in ['allyes', 'yes']:
                 print "I'm gladly obey, my master"

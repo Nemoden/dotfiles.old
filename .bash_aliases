@@ -21,3 +21,4 @@ alias n12='. ~/.nvm/nvm.sh && nvm use 0.12'
 alias docker='sudo docker'
 alias gst="git status"
 alias gco="git checkout"
+alias gp="git push"
