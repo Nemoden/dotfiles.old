@@ -110,6 +110,8 @@ let python_highlight_all=1
 let python_highlight_exceptions=0
 let python_highlight_builtins=0
 let python_slow_sync=1
+" GLITCHING!
+" let g:go_auto_type_info = 1
 
 " Don't warn on
 "   E121 continuation line indentation is not a multiple of four
