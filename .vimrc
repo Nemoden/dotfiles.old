@@ -80,6 +80,7 @@ set wildmode=list:full
 set backupdir=~/.vim/tmp/backup,.
 set directory=~/.vim/tmp/swap,.
 set statusline=[%{getcwd()}]\ %<%f%h%m%r\ [:b%n]\ %y\ %{fugitive#statusline()}\ %b\ ENC\:\ %{&encoding}\ TERM\:\ %{&termencoding}\ %l,%c%V\ %P
+" set rtp+=~/.vim/bundle/tabnine-vim
 
 " Fugitive settings
 let g:git_branch_status_nogit="nogit"
@@ -151,7 +152,7 @@ nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
 nmap <silent><Leader>te <Esc>:Pytest error<CR>
 
 " Add the virtualenv's site-packages to vim path
-py << EOF
+py3 << EOF
 import os.path
 import sys
 import vim
@@ -231,6 +232,10 @@ function! GetPwd()
 endfunction
 map <leader>fcd :cd %:h<cr>:pwd<cr>
 map <leader>cd :call GetPwd()<cr>:pwd<cr>
+
+" cargo commands
+map <leader>cb :!cargo build<Return>
+map <leader>cr :!cargo run<Return>
 
 " highlight text if it's length exceeds 80 symbols
 " highlight OverLength ctermbg=red ctermfg=white guibg=#8A4040
