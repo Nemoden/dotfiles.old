@@ -152,7 +152,7 @@ nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
 nmap <silent><Leader>te <Esc>:Pytest error<CR>
 
 " Add the virtualenv's site-packages to vim path
-py3 << EOF
+py << EOF
 import os.path
 import sys
 import vim
