@@ -1,4 +1,8 @@
-alias lynx="lynx -accept_all_cookies"
+if [[ -f ~/lynx.cf ]]; then
+    alias lynx="lynx -accept_all_cookies -cfg=~/lynx.cfg"
+else
+    alias lynx="lynx -accept_all_cookies"
+fi
 
 alias kk="kubectl"
 alias ka="kubectl apply"
