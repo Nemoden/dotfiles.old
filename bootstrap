@@ -1,0 +1,81 @@
+#!/usr/bin/env python2
+import os
+import sys
+
+dotfiles_path = os.path.realpath( os.path.dirname(__file__) )
+homedir = os.path.expanduser('~')
+
+# exchange information with user
+exclude_list = (os.path.basename(__file__), '.gitmodules', '.git', 'README.md')
+tolink = [filename for filename in os.listdir(dotfiles_path) if filename not in exclude_list]
+# hold user answer to prompt
+answer = None
+
+for filename in tolink:
+    # define source and target
+    source = os.path.join(dotfiles_path, filename)
+    target = os.path.join(homedir,filename)
+
+    try:
+        print 'I am creating a symlink from', source, 'to', target
+        os.symlink(source, target)
+    except IOError as exc:
+        pass
+    except OSError as exc:
+        code, message = exc.args
+        if code == 17:
+            print "Link exists"
+            answers = {
+                'yes': {
+                    'overwrite': True,
+                    'reset': True,
+                },
+                'y': {
+                    'overwrite': True,
+                    'reset': True,
+                },
+                'allyes': {
+                    'overwrite': True,
+                    'reset': False,
+                },
+                'ay': {
+                    'overwrite': True,
+                    'reset': False,
+                },
+                'no': {
+                    'overwrite': False,
+                    'reset': True,
+                },
+                'n': {
+                    'overwrite': False,
+                    'reset': True,
+                },
+                'allno': {
+                    'overwrite': False,
+                    'reset': False,
+                },
+                'an': {
+                    'overwrite': False,
+                    'reset': False,
+                }
+            }
+            while answer not in answers.keys():
+                answer = raw_input("Target file %s exists. Would you like to override it? [all]yes / [all]no " % target).lower()
+                if answer not in answers.keys():
+                    print "Didn't get that, let's start over..."
+
+            answers[answer]['overwrite']
+
+            if answers[answer]['overwrite']:
+                print "Unlinking", target
+                os.unlink(target)
+                print "Creating link to ", target, 'from', source
+                os.symlink(source, target)
+            else:
+                print "Not overwriting"
+
+            if answers[answer]['reset']:
+                answer = None
+
+    finally:
+        pass
