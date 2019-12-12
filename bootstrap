@@ -14,7 +14,7 @@ answer = None
 for filename in tolink:
     # define source and target
     source = os.path.join(dotfiles_path, filename)
-    target = os.path.join(homedir,filename)
+    target = os.path.join(homedir, filename)
 
     try:
         print 'I am creating a symlink from', source, 'to', target
