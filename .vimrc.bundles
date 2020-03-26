@@ -12,8 +12,11 @@ command!  -nargs=1 UnPlug call s:UnPlug(<args>)
 
 let g:has_async = v:version >= 800 || has('nvim')
 
+" All the plugins are specified as full URLs because I can Cmd+click on them.
+" Each plugin is followed up with it's settings, making individual plugins'
+" settings easier to manage, i.e. no need to find which settigns belong to
+" which plugin across .vimrc.
 call plug#begin('~/.vim/plugged')
-
 
     Plug 'https://github.com/tpope/vim-fugitive.git'
 
@@ -54,13 +57,15 @@ call plug#begin('~/.vim/plugged')
         nmap <leader>9 <Plug>BuffetSwitch(9)
         nmap <leader>0 <Plug>BuffetSwitch(10)
 
-    Plug 'https://github.com/junegunn/fzf.git', { 'do': { -> fzf#install() } }
+    Plug 'https://github.com/junegunn/fzf.git', { 'do': { -> fzf#install() } } | Plug 'https://github.com/junegunn/fzf.vim.git'
+        map <C-P> :Files <CR>
 
     Plug 'https://github.com/preservim/nerdtree.git', { 'on': 'NERDTreeToggle' }
         map <F2> :NERDTreeToggle <Return>
         map <leader>t :NERDTreeToggle <CR>
 
     Plug 'https://github.com/preservim/nerdcommenter.git'
+
     Plug 'https://github.com/fatih/vim-go.git', { 'do': ':GoUpdateBinaries' }
         autocmd FileType go nmap <leader>i <Plug>(go-info)
         autocmd FileType go nmap <leader>d <Plug>(go-def)
