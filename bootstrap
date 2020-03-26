@@ -6,7 +6,7 @@ dotfiles_path = os.path.realpath( os.path.dirname(__file__) )
 homedir = os.path.expanduser('~')
 
 # exchange information with user
-exclude_list = (os.path.basename(__file__), '.gitmodules', '.git', 'README.md')
+exclude_list = (os.path.basename(__file__), '.gitmodules', '.gitignore', '.git', 'README.md')
 tolink = [filename for filename in os.listdir(dotfiles_path) if filename not in exclude_list]
 # hold user answer to prompt
 answer = None
