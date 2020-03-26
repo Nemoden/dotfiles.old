@@ -77,33 +77,15 @@ filetype plugin indent on
 " table mode for md files
 autocmd FileType php setlocal colorcolumn=121
 autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 formatoptions=croqj softtabstop=4 textwidth=74 comments=:#\:,:#
+autocmd FileType python let python_highlight_all=1
+autocmd FileType python let python_highlight_exceptions=0
+autocmd FileType python let python_highlight_builtins=0
+autocmd FileType python let python_slow_sync=1
 autocmd FileType yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4
 autocmd FileType ruby setlocal sw=2 ts=2 sts=2 smartindent
 autocmd FileType javascript setlocal sw=4 ts=8 sts=4 smartindent
-autocmd BufNewFile,BufRead,BufEnter,FileType *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
-
-let g:git_branch_status_nogit="nogit"
-let b:SuperTabDisabled = 1
-let python_highlight_all=1
-let python_highlight_exceptions=0
-let python_highlight_builtins=0
-let python_slow_sync=1
-" autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-let g:SuperTabDefaultCompletionType = "context"
-
-" Add the virtualenv's site-packages to vim path
-"py3 << EOF
-"import os.path
-"import sys
-"import vim
-"if 'VIRTUAL_ENV' in os.environ:
-    "project_base_dir = os.environ['VIRTUAL_ENV']
-    "sys.path.insert(0, project_base_dir)
-    "activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    "execfile(activate_this, dict(__file__=activate_this))
-"EOF
 
 :lan tim en_US.UTF-8
 :nnoremap <F5> "=strftime("%c")<CR>P
