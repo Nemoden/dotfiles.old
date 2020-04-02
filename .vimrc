@@ -87,9 +87,11 @@ autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4
 autocmd FileType ruby setlocal sw=2 ts=2 sts=2 smartindent
 autocmd FileType javascript setlocal sw=4 ts=8 sts=4 smartindent
 
-:lan tim en_US.UTF-8
-:nnoremap <F5> "=strftime("%c")<CR>P
-:inoremap <F5> <C-R>=strftime("%c")<CR>
+
+lan tim en_US.UTF-8
+nnoremap <F5> "=strftime("%c")<CR>P
+inoremap <F5> <C-R>=strftime("%c")<CR>
+nnoremap <leader><leader> <C-^> " alternate between 2 last files
 
 function! GetPwd()
   return system('pwd')

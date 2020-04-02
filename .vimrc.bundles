@@ -58,15 +58,30 @@ call plug#begin('~/.vim/plugged')
         nmap <leader>0 <Plug>BuffetSwitch(10)
 
     Plug 'https://github.com/junegunn/fzf.git', { 'do': { -> fzf#install() } } | Plug 'https://github.com/junegunn/fzf.vim.git'
-        map <C-P> :Files <CR>
+        if exists('g:loaded_fugitive')
+            nnoremap <expr> <C-p> fugitive#head() != '' ? ':GFiles --cached --others --exclude-standard<CR>' : ':Files<CR>'
+            nnoremap <expr> <C-o> fugitive#head() != '' ? ':GFiles?<CR>' : ''
+        else
+            silent! !git rev-parse --is-inside-work-tree
+            if v:shell_error == 0
+              nnoremap <C-p> :GFiles --cached --others --exclude-standard<CR>
+              nnoremap <C-o> :GFiles?<CR>
+            else
+              nnoremap <C-p> :Files<CR>
+            endif
+        endif
+        nnoremap <leader>b :Buffers<CR>
+        nnoremap <leader>f :BLines<CR>
+        nnoremap <leader>ff :Lines<CR>
 
     Plug 'https://github.com/preservim/nerdtree.git', { 'on': 'NERDTreeToggle' }
-        map <F2> :NERDTreeToggle <Return>
-        map <leader>t :NERDTreeToggle <CR>
+        noremap <F2> :NERDTreeToggle <Return>
 
     Plug 'https://github.com/preservim/nerdcommenter.git'
+        nmap <C-_> :call NERDComment("n","Invert") <CR>
+        nmap <D-_> :call NERDComment("n","Invert") <CR>
 
-    Plug 'https://github.com/fatih/vim-go.git', { 'do': ':GoUpdateBinaries' }
+    Plug 'https://github.com/fatih/vim-go.git', { 'do': ':GoUpdateBinaries', 'for': 'go' }
         autocmd FileType go nmap <leader>i <Plug>(go-info)
         autocmd FileType go nmap <leader>d <Plug>(go-def)
         autocmd FileType go nmap <leader>b :GoDefPop<CR>
@@ -78,6 +93,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/tpope/vim-surround.git'
 
     Plug 'https://github.com/vim-syntastic/syntastic.git'
+        autocmd FileType php let g:syntastic_php_checkers = ['php']
 
     Plug 'https://github.com/plasticboy/vim-markdown.git'
 
