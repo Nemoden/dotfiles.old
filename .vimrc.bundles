@@ -23,6 +23,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/jmcantrell/vim-virtualenv.git'
 
     Plug 'https://github.com/vim-airline/vim-airline.git' | Plug 'vim-airline/vim-airline-themes'
+        " consider: https://github.com/itchyny/lightline.vim
         " set statusline=[%{getcwd()}]\ %<%f%h%m%r\ [:b%n]\ %y\ %{fugitive#statusline()}\ %b\ ENC\:\ %{&encoding}\ TERM\:\ %{&termencoding}\ %l,%c%V\ %P
         let g:airline_theme='wombat'
 
@@ -106,6 +107,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/sheerun/vim-polyglot.git'
 
     Plug 'https://github.com/flazz/vim-colorschemes.git'
+
+    Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-phpls' }
+        inoremap <silent><expr> <c-space> coc#refresh()
 
     if g:has_async
       Plug 'https://github.com/dense-analysis/ale.git'
