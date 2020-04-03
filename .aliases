@@ -1,4 +1,5 @@
-if [[ -f ~/lynx.cf ]]; then
+# vim: ft=bash
+if [[ -f ~/lynx.cfg ]]; then
     alias lynx="lynx -accept_all_cookies -cfg=~/lynx.cfg"
 else
     alias lynx="lynx -accept_all_cookies"
@@ -41,3 +42,13 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 alias path='echo -e ${PATH//:/\\n}'
 
 alias tre="tree -aC -I '.git|node_modules|bower_components' --dirsfirst . | less -FRNX"
+
+# upgrade cat
+if [[ -x "$(command -v bat)" ]]; then
+    alias cat="bat -pp"
+    alias caat="bat -n"
+    alias caaat="bat"
+else
+    alias caat="cat -n"
+    alias caaat="cat -n"
+fi

@@ -6,7 +6,7 @@ dotfiles_path = os.path.realpath( os.path.dirname(__file__) )
 homedir = os.path.expanduser('~')
 
 # exchange information with user
-exclude_list = (os.path.basename(__file__), '.gitmodules', '.gitignore', '.git', 'README.md')
+exclude_list = (os.path.basename(__file__), '.gitmodules', '.gitignore', '.git', 'README.md', 'assets')
 tolink = [filename for filename in os.listdir(dotfiles_path) if filename not in exclude_list]
 # hold user answer to prompt
 answer = None
@@ -17,14 +17,13 @@ for filename in tolink:
     target = os.path.join(homedir, filename)
 
     try:
-        print 'I am creating a symlink from', source, 'to', target
         os.symlink(source, target)
+        print "Linking from", source, "to", target
     except IOError as exc:
         pass
     except OSError as exc:
         code, message = exc.args
         if code == 17:
-            print "Link exists"
             answers = {
                 'yes': {
                     'overwrite': True,
@@ -67,15 +66,12 @@ for filename in tolink:
             answers[answer]['overwrite']
 
             if answers[answer]['overwrite']:
-                print "Unlinking", target
-                os.unlink(target)
-                print "Creating link to ", target, 'from', source
+                print "Unlinking", target, "and creating link from", source
                 os.symlink(source, target)
             else:
-                print "Not overwriting"
+                pass
 
             if answers[answer]['reset']:
                 answer = None
-
     finally:
         pass
