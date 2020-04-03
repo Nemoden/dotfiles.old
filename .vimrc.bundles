@@ -93,9 +93,6 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'https://github.com/tpope/vim-surround.git'
 
-    Plug 'https://github.com/vim-syntastic/syntastic.git'
-        autocmd FileType php let g:syntastic_php_checkers = ['php']
-
     Plug 'https://github.com/plasticboy/vim-markdown.git'
 
     Plug 'https://github.com/dhruvasagar/vim-table-mode.git'
@@ -112,7 +109,10 @@ call plug#begin('~/.vim/plugged')
         inoremap <silent><expr> <c-space> coc#refresh()
 
     if g:has_async
-      Plug 'https://github.com/dense-analysis/ale.git'
+        Plug 'https://github.com/dense-analysis/ale.git'
+    else
+        Plug 'https://github.com/vim-syntastic/syntastic.git'
+            autocmd FileType php let g:syntastic_php_checkers = ['php']
     endif
 
     if filereadable(expand("~/.vimrc.bundles.local"))
