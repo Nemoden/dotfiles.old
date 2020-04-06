@@ -109,6 +109,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/flazz/vim-colorschemes.git'
 
     Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release', 'do': ':CocInstall coc-phpls' }
+        " TODO: purchse licence from https://intelephense.com/
         inoremap <silent><expr> <c-space> coc#refresh()
         " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
         " position. Coc only does snippet and additional edit on confirm.
