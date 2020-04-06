@@ -77,6 +77,26 @@ call plug#begin('~/.vim/plugged')
         nnoremap <leader>fb :BLines<CR>
         nnoremap <leader>fl :Lines<CR>
 
+        command! -bang -nargs=* Rg
+                    \ call fzf#vim#grep(
+                    \   'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
+                    \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+                    \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+                    \   <bang>0)
+
+
+        function! RipgrepFzf(query, fullscreen)
+            let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+            let initial_command = printf(command_fmt, shellescape(a:query))
+            let reload_command = printf(command_fmt, '{q}')
+            let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+            call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+        endfunction
+        command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+        nnoremap <leader>ff :Rg!<CR>
+        nnoremap <leader>FF :RG!<CR>
+
     Plug 'https://github.com/preservim/nerdtree.git', { 'on': 'NERDTreeToggle' }
         noremap <F2> :NERDTreeToggle <CR>
         nnoremap <leader>ft :NERDTreeToggle <CR>
@@ -168,10 +188,6 @@ call plug#begin('~/.vim/plugged')
         Plug 'https://github.com/vim-syntastic/syntastic.git'
             autocmd FileType php let g:syntastic_php_checkers = ['php']
     endif
-
-    Plug 'https://github.com/jremmen/vim-ripgrep.git'
-        let g:rg_highlight="true"
-        nnoremap <leader>ff :Rg<Space>
 
     if filereadable(expand("~/.vimrc.bundles.local"))
       source ~/.vimrc.bundles.local
