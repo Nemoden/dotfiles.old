@@ -1,4 +1,4 @@
-if [[ -f ~/lynx.cf ]]; then
+if [[ -f ~/lynx.cfg ]]; then
     alias lynx="lynx -accept_all_cookies -cfg=~/lynx.cfg"
 else
     alias lynx="lynx -accept_all_cookies"
