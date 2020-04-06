@@ -92,6 +92,11 @@ lan tim en_US.UTF-8
 nnoremap <F5> "=strftime("%c")<CR>P
 inoremap <F5> <C-R>=strftime("%c")<CR>
 nnoremap <leader><leader> <C-^> " alternate between 2 last files
+" Effectively C-C is the same to Esc, but some plugins will treat only Esc
+" properly ¯\_(ツ)_/¯ Especially that was irritating with coc.nvim plugin
+" which would hang a dangling tooltip on completion selection followed by
+" Ctrl+C
+inoremap <C-C> <Esc>
 
 function! GetPwd()
   return system('pwd')
@@ -105,12 +110,12 @@ map <leader>cb :!cargo build<Return>
 map <leader>cr :!cargo run<Return>
 
 " Ctrl-Space for completions. Heck Yeah!
-inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-    \ "\<lt>C-n>" :
-    \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-    \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-    \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
+"inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+    "\ "\<lt>C-n>" :
+    "\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+    "\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+    "\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+"imap <C-@> <C-Space>
 
 " :w!! asks for sudo password to modify system files
 cmap w!! %!sudo tee > /dev/null %
