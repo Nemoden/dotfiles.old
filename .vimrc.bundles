@@ -86,8 +86,8 @@ call plug#begin('~/.vim/plugged')
         nmap <D-_> :call NERDComment("n","Invert") <CR>
 
     Plug 'https://github.com/fatih/vim-go.git', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-        autocmd FileType go nmap <leader>i <Plug>(go-info)
-        autocmd FileType go nmap <leader>d <Plug>(go-def)
+        autocmd FileType go nmap <leader>gi <Plug>(go-info)
+        autocmd FileType go nmap <leader>gd <Plug>(go-def)
         autocmd FileType go nmap <leader>b :GoDefPop<CR>
         autocmd FileType go nmap <leader>s :GoSameIds<CR>
         autocmd FileType go nmap <leader>r :GoRename<CR>
