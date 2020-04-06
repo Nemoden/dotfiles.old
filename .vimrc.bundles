@@ -62,20 +62,22 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'https://github.com/junegunn/fzf.git', { 'do': { -> fzf#install() } } | Plug 'https://github.com/junegunn/fzf.vim.git'
         if exists('g:loaded_fugitive')
-            nnoremap <expr> <C-p> fugitive#head() != '' ? ':GFiles --cached --others --exclude-standard<CR>' : ':Files<CR>'
-            nnoremap <expr> <C-o> fugitive#head() != '' ? ':GFiles?<CR>' : ''
+            nnoremap <expr> <C-p> fugitive#head() != '' ? ':GFiles! --cached --others --exclude-standard<CR>' : ':Files<CR>'
+            nnoremap <expr> <C-o> fugitive#head() != '' ? ':GFiles!?<CR>' : ''
         else
             silent! !git rev-parse --is-inside-work-tree
             if v:shell_error == 0
-              nnoremap <C-p> :GFiles --cached --others --exclude-standard<CR>
-              nnoremap <C-o> :GFiles?<CR>
+              nnoremap <C-p> :GFiles! --cached --others --exclude-standard<CR>
+              nnoremap <C-o> :GFiles!?<CR>
             else
-              nnoremap <C-p> :Files<CR>
+              nnoremap <C-p> :Files!<CR>
+              nnoremap <C-o> :echom "Not a GIT repo!"<CR>
             endif
         endif
-        nnoremap <leader>bb :Buffers<CR>
-        nnoremap <leader>fb :BLines<CR>
-        nnoremap <leader>fl :Lines<CR>
+        nnoremap <leader>bb :Buffers!<CR>
+        nnoremap <leader>fb :BLines!<CR>
+        nnoremap <leader>bl :BLines!<CR>
+        nnoremap <leader>fl :Lines!<CR>
 
         command! -bang -nargs=* Rg
                     \ call fzf#vim#grep(
@@ -83,7 +85,6 @@ call plug#begin('~/.vim/plugged')
                     \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
                     \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
                     \   <bang>0)
-
 
         function! RipgrepFzf(query, fullscreen)
             let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'

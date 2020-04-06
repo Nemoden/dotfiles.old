@@ -111,12 +111,12 @@ map <leader>cb :!cargo build<Return>
 map <leader>cr :!cargo run<Return>
 
 " Ctrl-Space for completions. Heck Yeah!
-inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-    \ "\<lt>C-n>" :
-    \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-    \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-    \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
+"inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+    "\ "\<lt>C-n>" :
+    "\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+    "\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+    "\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+"imap <C-@> <C-Space>
 
 " :w!! asks for sudo password to modify system files
 cmap w!! %!sudo tee > /dev/null %
