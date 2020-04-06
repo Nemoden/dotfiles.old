@@ -78,7 +78,8 @@ call plug#begin('~/.vim/plugged')
         nnoremap <leader>fl :Lines<CR>
 
     Plug 'https://github.com/preservim/nerdtree.git', { 'on': 'NERDTreeToggle' }
-        noremap <F2> :NERDTreeToggle <Return>
+        noremap <F2> :NERDTreeToggle <CR>
+        nnoremap <leader>ft :NERDTreeToggle <CR>
 
     Plug 'https://github.com/preservim/nerdcommenter.git'
         nmap <C-_> :call NERDComment("n","Invert") <CR>

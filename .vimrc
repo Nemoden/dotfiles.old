@@ -14,6 +14,7 @@ if filereadable(expand("~/.vim/abbreviations"))
 endif
 
 set backspace=2
+set relativenumber
 set autowrite
 set nobackup
 set nowritebackup
