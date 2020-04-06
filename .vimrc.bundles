@@ -71,7 +71,7 @@ call plug#begin('~/.vim/plugged')
               nnoremap <C-o> :GFiles!?<CR>
             else
               nnoremap <C-p> :Files!<CR>
-              nnoremap <C-o> :echom "Not a GIT repo!"<CR>
+              nnoremap <C-o> :echom "Not a GIT repo ¯\\_(ツ)_/¯"<CR>
             endif
         endif
         nnoremap <leader>bb :Buffers!<CR>
