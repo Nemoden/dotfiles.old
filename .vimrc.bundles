@@ -98,9 +98,14 @@ call plug#begin('~/.vim/plugged')
         nnoremap <leader>ff :Rg!<CR>
         nnoremap <leader>FF :RG!<CR>
 
-    Plug 'https://github.com/preservim/nerdtree.git', { 'on': 'NERDTreeToggle' }
+    Plug 'https://github.com/preservim/nerdtree.git', { 'on': ['NERDTreeToggle', 'NERDTreeFind', 'NERDTreeCWD'] }
         noremap <F2> :NERDTreeToggle <CR>
-        nnoremap <leader>ft :NERDTreeToggle <CR>
+        " Tree Toggle.
+        nnoremap <leader>tt :NERDTreeToggle <CR>
+        " Tree Find.
+        nnoremap <leader>tf :NERDTreeFind <CR>
+        " Tree CWD.
+        nnoremap <leader>tc :NERDTreeCWD <CR>
 
     Plug 'https://github.com/preservim/nerdcommenter.git'
         nmap <C-_> :call NERDComment("n","Invert") <CR>
@@ -119,7 +124,7 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'https://github.com/plasticboy/vim-markdown.git'
 
-    Plug 'https://github.com/dhruvasagar/vim-table-mode.git'
+    Plug 'https://github.com/dhruvasagar/vim-table-mode.git', { 'for': 'markdown' }
         autocmd FileType markdown :TableModeEnable
         autocmd FileType markdown let g:table_mode_corner="|"
 
@@ -143,7 +148,8 @@ call plug#begin('~/.vim/plugged')
         " GoTo code navigation.
         nmap <silent> <leader>gd <Plug>(coc-definition)
         nmap <silent> <leader>gr <Plug>(coc-references)
-        " only available with registration key
+        " ONLY AVAILABLE WITH REGISTRATION KEY "
+        nmap <leader>rn <Plug>(coc-rename)
         nmap <silent> <leader>gy <Plug>(coc-type-definition)
         nmap <silent> <leader>gi <Plug>(coc-implementation)
         " Use K to show documentation in preview window.

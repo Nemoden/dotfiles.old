@@ -87,6 +87,8 @@ autocmd FileType json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4
 autocmd FileType ruby setlocal sw=2 ts=2 sts=2 smartindent
 autocmd FileType javascript setlocal sw=4 ts=8 sts=4 smartindent
+autocmd FileType rust nmap <leader>cb :!cargo build<Return>
+autocmd FileType rust nmap <leader>cr :!cargo run<Return>
 
 
 lan tim en_US.UTF-8
@@ -106,9 +108,6 @@ endfunction
 map <leader>fcd :cd %:h<cr>:pwd<cr>
 map <leader>cd :call GetPwd()<cr>:pwd<cr>
 
-" cargo commands
-map <leader>cb :!cargo build<Return>
-map <leader>cr :!cargo run<Return>
 
 " Ctrl-Space for completions. Heck Yeah!
 "inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
