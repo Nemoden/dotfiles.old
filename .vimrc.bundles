@@ -18,47 +18,23 @@ let g:has_async = v:version >= 800 || has('nvim')
 " which plugin across .vimrc.
 call plug#begin('~/.vim/plugged')
 
+    Plug 'https://github.com/flazz/vim-colorschemes.git'
+
+    Plug 'https://github.com/vim-airline/vim-airline.git' | Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+        let g:airline_powerline_fonts = 1
+        let g:airline_theme='jellybeans'
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+        noremap <Tab> :bnext<CR>
+        noremap <S-Tab> :bprevious<CR>
+
     Plug 'https://github.com/tpope/vim-fugitive.git'
 
     Plug 'https://github.com/jmcantrell/vim-virtualenv.git'
 
-    Plug 'https://github.com/vim-airline/vim-airline.git' | Plug 'vim-airline/vim-airline-themes'
-        " consider: https://github.com/itchyny/lightline.vim
-        " set statusline=[%{getcwd()}]\ %<%f%h%m%r\ [:b%n]\ %y\ %{fugitive#statusline()}\ %b\ ENC\:\ %{&encoding}\ TERM\:\ %{&termencoding}\ %l,%c%V\ %P
-        let g:airline_theme='wombat'
-
-    " Plug 'https://github.com/terryma/vim-multiple-cursors'
+    " Plug 'https://github.com/terryma/vim-multiple-cursors.git'
 
     Plug 'https://github.com/ryanoasis/vim-devicons.git'
-
-    Plug 'https://github.com/bagrat/vim-buffet.git'
-        let g:buffet_powerline_separators = 1
-        let g:buffet_show_index = 1
-        let g:buffet_tab_icon = "\uf00a"
-        let g:buffet_left_trunc_icon = "\uf0a8"
-        let g:buffet_right_trunc_icon = "\uf0a9"
-        noremap <Tab> :bn<CR>
-        noremap <S-Tab> :bp<CR>
-        noremap <Leader><Tab> :Bw<CR>
-        noremap <Leader><S-Tab> :Bw!<CR>
-        noremap <C-t> :tabnew split<CR>
-        function! g:BuffetSetCustomColors()
-            hi! BuffetCurrentBuffer cterm=NONE ctermbg=106 ctermfg=8 guibg=#b8bb26 guifg=#000000
-            hi! BuffetTrunc cterm=bold ctermbg=66 ctermfg=8 guibg=#458588 guifg=#000000
-            hi! BuffetBuffer cterm=NONE ctermbg=239 ctermfg=8 guibg=#504945 guifg=#000000
-            hi! BuffetTab cterm=NONE ctermbg=66 ctermfg=8 guibg=#458588 guifg=#000000
-            hi! BuffetActiveBuffer cterm=NONE ctermbg=10 ctermfg=239 guibg=#999999 guifg=#504945
-        endfunction
-        nmap <leader>1 <Plug>BuffetSwitch(1)
-        nmap <leader>2 <Plug>BuffetSwitch(2)
-        nmap <leader>3 <Plug>BuffetSwitch(3)
-        nmap <leader>4 <Plug>BuffetSwitch(4)
-        nmap <leader>5 <Plug>BuffetSwitch(5)
-        nmap <leader>6 <Plug>BuffetSwitch(6)
-        nmap <leader>7 <Plug>BuffetSwitch(7)
-        nmap <leader>8 <Plug>BuffetSwitch(8)
-        nmap <leader>9 <Plug>BuffetSwitch(9)
-        nmap <leader>0 <Plug>BuffetSwitch(10)
 
     Plug 'https://github.com/junegunn/fzf.git', { 'do': { -> fzf#install() } } | Plug 'https://github.com/junegunn/fzf.vim.git'
         if exists('g:loaded_fugitive')
@@ -98,14 +74,43 @@ call plug#begin('~/.vim/plugged')
         nnoremap <leader>ff :Rg!<CR>
         nnoremap <leader>FF :RG!<CR>
 
-    Plug 'https://github.com/preservim/nerdtree.git', { 'on': ['NERDTreeToggle', 'NERDTreeFind', 'NERDTreeCWD'] }
+    Plug 'https://github.com/preservim/nerdtree.git', { 'on': ['NERDTreeToggle', 'NERDTreeFind', 'NERDTreeCWD'] } 
+        \ | Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin.git'
         noremap <F2> :NERDTreeToggle <CR>
         " Tree Toggle.
         nnoremap <leader>tt :NERDTreeToggle <CR>
-        " Tree Find.
-        nnoremap <leader>tf :NERDTreeFind <CR>
+        " Tree Reveal.
+        nnoremap <leader>tr :NERDTreeFind <CR>
         " Tree CWD.
         nnoremap <leader>tc :NERDTreeCWD <CR>
+
+        let NERDTreeShowHidden=1
+        let NERDTreeQuitOnOpen=1
+        let NERDTreeSortHiddenFirst=0
+        let NERDTreeIgnore=['\.pyc$', '\.bak$', '.git[[dir]]']
+
+        let g:NERDTreeShowIgnoredStatus = 1
+
+        " NERDTress File highlighting
+        " https://github.com/preservim/nerdtree/issues/433#issuecomment-92590696
+        function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+            exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+            exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+        endfunction
+
+        call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+        call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+        call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+        call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+        call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+        call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+        call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+        call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+        call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+        call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+        call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+        call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+        call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
     Plug 'https://github.com/preservim/nerdcommenter.git'
         nmap <C-_> :call NERDComment("n","Invert") <CR>
@@ -131,8 +136,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'https://github.com/vim-scripts/kwbdi.vim.git'
 
     Plug 'https://github.com/sheerun/vim-polyglot.git'
-
-    Plug 'https://github.com/flazz/vim-colorschemes.git'
 
     Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release', 'do': ':CocInstall coc-phpls' }
         " TODO: purchse licence from https://intelephense.com/
@@ -175,12 +178,10 @@ call plug#begin('~/.vim/plugged')
             return !col || getline('.')[col - 1]  =~# '\s'
         endfunction
 
+        nnoremap <leader>gs :CocList --interactive symbols <CR>
+
         " Give more space for displaying messages.
         set cmdheight=2
-
-        " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-        " delays and poor user experience.
-        set updatetime=300
 
         " Don't pass messages to |ins-completion-menu|.
         set shortmess+=c
@@ -190,11 +191,52 @@ call plug#begin('~/.vim/plugged')
         set signcolumn=yes
 
     if g:has_async
-        Plug 'https://github.com/dense-analysis/ale.git'
+        Plug 'https://github.com/desmap/ale-sensible.git' | Plug 'https://github.com/dense-analysis/ale.git'
+            let b:ale_fixers = {'php': ['phpcbf']}
     else
         Plug 'https://github.com/vim-syntastic/syntastic.git'
             autocmd FileType php let g:syntastic_php_checkers = ['php']
     endif
+
+    Plug 'https://github.com/airblade/vim-gitgutter.git'
+
+    " Using both since not yet decided which one I prefer better.
+    Plug 'https://github.com/simnalamburt/vim-mundo.git', { 'on': 'MundoToggle' }
+        let g:mundo_width = 40
+        let g:mundo_preview_height = 15
+        let g:mundo_right = 1
+        let g:mundo_close_on_revert = 1
+        let g:mundo_playback_delay = 200
+        let g:mundo_preview_bottom = 1
+        nnoremap <leader>UU :MundoToggle <CR>
+
+    Plug 'https://github.com/mbbill/undotree.git'
+        nnoremap <leader>uu :UndotreeToggle <CR>
+        let g:undotree_WindowLayout = 4
+        let g:undotree_SetFocusWhenToggle = 1
+        let g:undotree_ShortIndicators = 1
+        let g:undotree_SplitWidth = 30
+
+    Plug 'https://github.com/liuchengxu/vista.vim.git'
+        nnoremap <leader>st :Vista!! <CR>
+
+        function! NearestMethodOrFunction() abort
+            return get(b:, 'vista_nearest_method_or_function', '')
+        endfunction
+        set statusline+=%{NearestMethodOrFunction()}
+        " show nearest method or function on VIM load.
+        autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
+        let g:vista_executive_for = {
+                    \ 'php': 'coc',
+                    \ }
+        let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+        let g:vista_fzf_preview = ['right:50%']
+        let g:vista#renderer#enable_icon = 1
+        let g:vista#renderer#icons = {
+                    \  "function": "\uf794",
+                    \  "variable": "\uf71b",
+                    \ }
 
     if filereadable(expand("~/.vimrc.bundles.local"))
       source ~/.vimrc.bundles.local

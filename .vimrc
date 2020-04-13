@@ -2,6 +2,12 @@ set encoding=utf-8
 
 " leader
 let mapleader = ";"
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+  syntax on
+endif
+filetype plugin indent on
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
@@ -61,19 +67,31 @@ set wildmenu
 set wildignore+=*.pyc,*.dll,*.o,*.bak,*.exe,*.jpg,*.jpeg,*.sublime-project,*.sublime-workspace
 " set wildmode=list:full
 set wildmode=list:longest,list:full
+" In case backup and swap options are on, don't store those files next to the file that is being edited.
 set backupdir=~/.vim/tmp/backup,.
 set directory=~/.vim/tmp/swap,.
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
-set background=dark
-colorscheme xoria256
 set guifont=Monaco\ 10
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
+set updatetime=200
+
+" Enable persistent undo so that undo history persists across vim sessions
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let undoDir = expand(vimDir . '/tmp/undo')
+    call system('mkdir -p ' . undoDir)
+    let &undodir = undoDir
+    set undolevels=1000
+    set undoreload=10000
+    set undofile
 endif
-filetype plugin indent on
+
+set background=dark
+" favs: xoria256, molokai, jellybeans, gruvbox (?), ayu, OceanicNext
+colorscheme jellybeans
 
 " table mode for md files
 autocmd FileType php setlocal colorcolumn=121
@@ -107,7 +125,6 @@ endfunction
 
 map <leader>fcd :cd %:h<cr>:pwd<cr>
 map <leader>cd :call GetPwd()<cr>:pwd<cr>
-
 
 " Ctrl-Space for completions. Heck Yeah!
 "inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
