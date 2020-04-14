@@ -91,7 +91,7 @@ endif
 
 set background=dark
 " favs: xoria256, molokai, jellybeans, gruvbox (?), ayu, OceanicNext
-colorscheme jellybeans
+colorscheme gruvbox
 
 " table mode for md files
 autocmd FileType php setlocal colorcolumn=121
@@ -113,11 +113,7 @@ lan tim en_US.UTF-8
 nnoremap <F5> "=strftime("%c")<CR>P
 inoremap <F5> <C-R>=strftime("%c")<CR>
 nnoremap <leader><leader> <C-^> " alternate between 2 last files
-" Effectively C-C is the same to Esc, but some plugins will treat only Esc
-" properly ¯\_(ツ)_/¯ Especially that was irritating with coc.nvim plugin
-" which would hang a dangling tooltip on completion selection followed by
-" Ctrl+C
-inoremap <C-C> <Esc>
+nnoremap <leader>R :source ~/.vimrc<CR>
 
 function! GetPwd()
   return system('pwd')

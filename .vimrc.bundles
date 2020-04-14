@@ -18,11 +18,17 @@ let g:has_async = v:version >= 800 || has('nvim')
 " which plugin across .vimrc.
 call plug#begin('~/.vim/plugged')
 
-    Plug 'https://github.com/flazz/vim-colorschemes.git'
+    Plug 'https://github.com/flazz/vim-colorschemes.git' | Plug 'https://github.com/morhetz/gruvbox.git'
+        let g:gruvbox_italicize_strings=0
+        let g:gruvbox_improved_strings=0
+        let g:gruvbox_improved_warnings=1
+        let g:gruvbox_contrast_dark='hard'
+        let g:gruvbox_invert_signs=0
+        let g:gruvbox_invert_selection=0
 
     Plug 'https://github.com/vim-airline/vim-airline.git' | Plug 'https://github.com/vim-airline/vim-airline-themes.git'
         let g:airline_powerline_fonts = 1
-        let g:airline_theme='jellybeans'
+        let g:airline_theme='gruvbox'
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
         noremap <Tab> :bnext<CR>
@@ -38,7 +44,7 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'https://github.com/junegunn/fzf.git', { 'do': { -> fzf#install() } } | Plug 'https://github.com/junegunn/fzf.vim.git'
         if exists('g:loaded_fugitive')
-            nnoremap <expr> <C-p> fugitive#head() != '' ? ':GFiles! --cached --others --exclude-standard<CR>' : ':Files<CR>'
+            nnoremap <expr> <C-p> fugitive#head() != '' ? ':GFiles! --cached --others --exclude-standard<CR>' : ':Files!<CR>'
             nnoremap <expr> <C-o> fugitive#head() != '' ? ':GFiles!?<CR>' : ''
         else
             silent! !git rev-parse --is-inside-work-tree
@@ -139,11 +145,9 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release', 'do': ':CocInstall coc-phpls' }
         " TODO: purchse licence from https://intelephense.com/
-        inoremap <silent><expr> <c-space> coc#refresh()
         " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
         " position. Coc only does snippet and additional edit on confirm.
-        if has('patch8.1.1068')
-            " Use `complete_info` if your (Neo)Vim version supports it.
+        if exists('*complete_info')
             inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
         else
             imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -178,7 +182,10 @@ call plug#begin('~/.vim/plugged')
             return !col || getline('.')[col - 1]  =~# '\s'
         endfunction
 
-        nnoremap <leader>gs :CocList --interactive symbols <CR>
+        " navigate to a symbol in current buffer (for now php only).
+        autocmd FileType php nnoremap <leader>gs :CocList outline<CR>
+
+        inoremap <silent><expr> <c-space> coc#refresh()
 
         " Give more space for displaying messages.
         set cmdheight=2
@@ -190,6 +197,8 @@ call plug#begin('~/.vim/plugged')
         " diagnostics appear/become resolved.
         set signcolumn=yes
 
+    Plug 'https://github.com/airblade/vim-gitgutter.git'
+
     if g:has_async
         Plug 'https://github.com/desmap/ale-sensible.git' | Plug 'https://github.com/dense-analysis/ale.git'
             let b:ale_fixers = {'php': ['phpcbf']}
@@ -197,8 +206,6 @@ call plug#begin('~/.vim/plugged')
         Plug 'https://github.com/vim-syntastic/syntastic.git'
             autocmd FileType php let g:syntastic_php_checkers = ['php']
     endif
-
-    Plug 'https://github.com/airblade/vim-gitgutter.git'
 
     " Using both since not yet decided which one I prefer better.
     Plug 'https://github.com/simnalamburt/vim-mundo.git', { 'on': 'MundoToggle' }
@@ -208,17 +215,18 @@ call plug#begin('~/.vim/plugged')
         let g:mundo_close_on_revert = 1
         let g:mundo_playback_delay = 200
         let g:mundo_preview_bottom = 1
-        nnoremap <leader>UU :MundoToggle <CR>
+        nnoremap <leader>U :MundoToggle <CR>
 
     Plug 'https://github.com/mbbill/undotree.git'
-        nnoremap <leader>uu :UndotreeToggle <CR>
+        nnoremap <leader>u :UndotreeToggle <CR>
         let g:undotree_WindowLayout = 4
         let g:undotree_SetFocusWhenToggle = 1
         let g:undotree_ShortIndicators = 1
         let g:undotree_SplitWidth = 30
 
     Plug 'https://github.com/liuchengxu/vista.vim.git'
-        nnoremap <leader>st :Vista!! <CR>
+        " show symbols.
+        nnoremap <leader>ss :Vista!! <CR>
 
         function! NearestMethodOrFunction() abort
             return get(b:, 'vista_nearest_method_or_function', '')
