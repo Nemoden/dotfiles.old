@@ -40,8 +40,6 @@ call plug#begin('~/.vim/plugged')
 
     " Plug 'https://github.com/terryma/vim-multiple-cursors.git'
 
-    Plug 'https://github.com/ryanoasis/vim-devicons.git'
-
     Plug 'https://github.com/junegunn/fzf.git', { 'do': { -> fzf#install() } } | Plug 'https://github.com/junegunn/fzf.vim.git'
         if exists('g:loaded_fugitive')
             nnoremap <expr> <C-p> fugitive#head() != '' ? ':GFiles! --cached --others --exclude-standard<CR>' : ':Files!<CR>'
@@ -80,20 +78,42 @@ call plug#begin('~/.vim/plugged')
         nnoremap <leader>ff :Rg!<CR>
         nnoremap <leader>FF :RG!<CR>
 
+        " find directory
+        function! s:append_dir_with_fzf(line)
+            call fzf#run(fzf#wrap({
+                        \ 'options': ['--prompt', a:line.'> '],
+                        \ 'source': 'find . -type d',
+                        \ 'sink': {line -> feedkeys("\<esc>:".a:line.line, 'n')}}))
+            return ''
+        endfunction
+        cnoremap <expr> <c-x><c-d> <sid>append_dir_with_fzf(getcmdline())
+
+        command! -nargs=* -complete=dir Cd 
+                    \ call fzf#run(fzf#wrap({
+                          \ 'source': 'find '.(empty(<f-args>) ? '.' : <f-args>).' -type d',
+                          \ 'sink': 'cd'
+                    \ }))
+
+        nnoremap <leader>fd Cd .<CR>
+
     Plug 'https://github.com/preservim/nerdtree.git', { 'on': ['NERDTreeToggle', 'NERDTreeFind', 'NERDTreeCWD'] } 
         \ | Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin.git'
         noremap <F2> :NERDTreeToggle <CR>
         " Tree Toggle.
         nnoremap <leader>tt :NERDTreeToggle <CR>
         " Tree Reveal.
-        nnoremap <leader>tr :NERDTreeFind <CR>
+        nnoremap <leader>TT :NERDTreeFind <CR>
         " Tree CWD.
         nnoremap <leader>tc :NERDTreeCWD <CR>
 
+        let NERDTreeWinSize=40
         let NERDTreeShowHidden=1
         let NERDTreeQuitOnOpen=1
         let NERDTreeSortHiddenFirst=0
+        let NERDTreeAutoDeleteBuffer = 1
         let NERDTreeIgnore=['\.pyc$', '\.bak$', '.git[[dir]]']
+        let NERDTreeMinimalUI=1
+        let NERDTreeMinimalMenu=0
 
         let g:NERDTreeShowIgnoredStatus = 1
 
@@ -118,6 +138,12 @@ call plug#begin('~/.vim/plugged')
         call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
         call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
+        " If the only remaining buffer is NERDTree, exit vim.
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+        " If more than one window and previous buffer was NERDTree, go back to
+        " it. Prevents opening buffers in NERDTree.
+        autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+
     Plug 'https://github.com/preservim/nerdcommenter.git'
         nmap <C-_> :call NERDComment("n","Invert") <CR>
         nmap <D-_> :call NERDComment("n","Invert") <CR>
@@ -135,15 +161,34 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'https://github.com/plasticboy/vim-markdown.git'
 
-    Plug 'https://github.com/dhruvasagar/vim-table-mode.git', { 'for': 'markdown' }
+    Plug 'https://github.com/dhruvasagar/vim-table-mode.git', { 'for': ['markdown', 'cucumber'] }
+        " Options: https://github.com/dhruvasagar/vim-table-mode/blob/master/t/config/options.vim
         autocmd FileType markdown :TableModeEnable
         autocmd FileType markdown let g:table_mode_corner="|"
+        " tt is taken for Tree Toggle. Don't use t prefix at all.
+        let g:table_mode_tableize_map = ''
+        let g:table_mode_tableize_d_map = ''
+        let g:table_mode_map_prefix = ''
 
     Plug 'https://github.com/vim-scripts/kwbdi.vim.git'
 
     Plug 'https://github.com/sheerun/vim-polyglot.git'
 
-    Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release', 'do': ':CocInstall coc-phpls' }
+    " Extensions: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+    Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release' }
+        let g:coc_global_extensions = [
+                    \ 'coc-git',
+                    \ 'coc-python',
+                    \ 'coc-yaml',
+                    \ 'coc-html',
+                    \ 'coc-json',
+                    \ 'coc-phpls',
+                    \ 'coc-go',
+                    \]
+        " load additional configuration
+        if filereadable(expand("~/.vim/coc-user-config.vim"))
+          source ~/.vim/coc-user-config.vim
+        endif
         " TODO: purchse licence from https://intelephense.com/
         " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
         " position. Coc only does snippet and additional edit on confirm.
@@ -153,8 +198,10 @@ call plug#begin('~/.vim/plugged')
             imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
         endif
         " GoTo code navigation.
-        nmap <silent> <leader>gd <Plug>(coc-definition)
-        nmap <silent> <leader>gr <Plug>(coc-references)
+        "nmap <silent> <leader>gd <Plug>(coc-definition)
+        nmap <silent> <leader>gd :call CocActionAsync('jumpDefinition')<CR>
+         "nmap <silent> <leader>gr <Plug>(coc-references)
+        nmap <silent> <leader>gr :call CocActionAsync('jumpReferences')<CR>
         " ONLY AVAILABLE WITH REGISTRATION KEY "
         nmap <leader>rn <Plug>(coc-rename)
         nmap <silent> <leader>gy <Plug>(coc-type-definition)
@@ -168,6 +215,7 @@ call plug#begin('~/.vim/plugged')
                 call CocAction('doHover')
             endif
         endfunction
+
         " Use tab for trigger completion with characters ahead and navigate.
         " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
         " other plugin before putting this into your config.
@@ -182,10 +230,18 @@ call plug#begin('~/.vim/plugged')
             return !col || getline('.')[col - 1]  =~# '\s'
         endfunction
 
+        inoremap <silent><expr> <c-space> coc#refresh()
+
+        " inoremap <expr><C-p> :CocAction('showSignatureHelp')
+        " inoremap <C-p> <Plug>(coc-codeaction)<CR>
+        augroup CocAu
+            autocmd!
+            autocmd CursorHoldI,CursorMovedI * call CocAction('showSignatureHelp')
+            autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+        augroup END
+
         " navigate to a symbol in current buffer (for now php only).
         autocmd FileType php nnoremap <leader>gs :CocList outline<CR>
-
-        inoremap <silent><expr> <c-space> coc#refresh()
 
         " Give more space for displaying messages.
         set cmdheight=2
@@ -222,11 +278,15 @@ call plug#begin('~/.vim/plugged')
         let g:undotree_WindowLayout = 4
         let g:undotree_SetFocusWhenToggle = 1
         let g:undotree_ShortIndicators = 1
-        let g:undotree_SplitWidth = 30
+        let g:undotree_SplitWidth = 40
+        let g:undotree_DiffAutoOpen = 0
 
     Plug 'https://github.com/liuchengxu/vista.vim.git'
+        ":help vista-commands
+
         " show symbols.
         nnoremap <leader>ss :Vista!! <CR>
+        nnoremap <leader>SS :Vista finder <CR>
 
         function! NearestMethodOrFunction() abort
             return get(b:, 'vista_nearest_method_or_function', '')
@@ -235,16 +295,30 @@ call plug#begin('~/.vim/plugged')
         " show nearest method or function on VIM load.
         autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
+        let g:vista_default_executive = 'coc'
+        let g:vista_floating_delay = 0
+        " blink 0 times by 0 milliseconds.
+        let g:vista_blink = [0, 0]
+        let g:vista_close_on_jump = 1
+        " g:vista_php_executive = 'coc'
         let g:vista_executive_for = {
                     \ 'php': 'coc',
                     \ }
         let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
         let g:vista_fzf_preview = ['right:50%']
         let g:vista#renderer#enable_icon = 1
+        let g:vista_keep_fzf_colors = 1
         let g:vista#renderer#icons = {
                     \  "function": "\uf794",
                     \  "variable": "\uf71b",
                     \ }
+
+    " Inportant: devicons should stay at the bottom, because otherwise, if
+    " loaded BEFORE nerdtree + nerdtree git, it would break icons alignment!
+    Plug 'https://github.com/ryanoasis/vim-devicons.git'
+
+    Plug 'https://github.com/luochen1990/rainbow.git'
+        let g:rainbow_active = 1
 
     if filereadable(expand("~/.vimrc.bundles.local"))
       source ~/.vimrc.bundles.local
@@ -264,4 +338,4 @@ call plug#begin('~/.vim/plugged')
     " mxw/vim-jsx
     " zxqfl/tabnine-vim
 
-call plug#end()
+:call plug#end()

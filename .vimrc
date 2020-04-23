@@ -1,7 +1,7 @@
 set encoding=utf-8
 
 " leader
-let mapleader = ";"
+let mapleader = ","
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
@@ -30,6 +30,7 @@ set nocompatible               " not compatible with vi
 set foldmethod=indent          " equally indented lines are folded
 set foldlevel=8                " folding level
 set modeline                   " read per-file settings
+set modelineexpr
 set tabstop=4                  " Number of spaces that a <Tab> in the file counts for
 set shiftwidth=4               " Number of spaces to use for each step of (auto)indent.
                                " Used for 'cindent', >>, <<, etc.
@@ -74,7 +75,8 @@ set directory=~/.vim/tmp/swap,.
 set list listchars=tab:»·,trail:·,nbsp:·
 set guifont=Monaco\ 10
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable delays and poor user experience.
-set updatetime=200
+set updatetime=300
+
 
 " Enable persistent undo so that undo history persists across vim sessions
 let vimDir = '$HOME/.vim'
@@ -100,6 +102,7 @@ autocmd FileType python let python_highlight_all=1
 autocmd FileType python let python_highlight_exceptions=0
 autocmd FileType python let python_highlight_builtins=0
 autocmd FileType python let python_slow_sync=1
+autocmd FileType cucumber setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 comments=:#\:,:#
 autocmd FileType yaml setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType json setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4
@@ -115,12 +118,42 @@ inoremap <F5> <C-R>=strftime("%c")<CR>
 nnoremap <leader><leader> <C-^> " alternate between 2 last files
 nnoremap <leader>R :source ~/.vimrc<CR>
 
+" Switching windows by Ctrl+<direction>
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+
+" Adjust split window sizes with Ctrl+<arrow>
+nnoremap <C-Left> :vertical resize +5<cr>
+nnoremap <C-Right> :vertical resize -5<cr>
+nnoremap <C-Up> :resize +2<cr>
+nnoremap <C-Down> :resize -2<cr>
+
 function! GetPwd()
   return system('pwd')
 endfunction
 
 map <leader>fcd :cd %:h<cr>:pwd<cr>
 map <leader>cd :call GetPwd()<cr>:pwd<cr>
+
+" source: https://superuser.com/questions/401926/how-to-get-shiftarrows-and-ctrlarrows-working-in-vim-in-tmux
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
+" vim jumps to the last position when reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 " Ctrl-Space for completions. Heck Yeah!
 "inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?

@@ -1,2 +1,4 @@
 .vim/plugged
-.vim/undo
+.vim/tmp
+.vim/coc-user-config.vim
+.terminalizer/token.txt
