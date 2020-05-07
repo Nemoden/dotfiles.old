@@ -331,6 +331,7 @@ call plug#begin('~/.vim/plugged')
                 \ 'java',
                 \ 'javascript',
                 \ 'javascriptreact',
+                \ 'lisp',
                 \ 'php',
                 \ 'rust',
                 \ 'typescript',
