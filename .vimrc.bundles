@@ -183,6 +183,9 @@ call plug#begin('~/.vim/plugged')
 
     " Extensions: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
     Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release' }
+        if executable('/usr/local/bin/node')
+            let g:coc_node_path = '/usr/local/bin/node'
+        endif
         let g:coc_global_extensions = [
                     \ 'coc-fish',
                     \ 'coc-git',

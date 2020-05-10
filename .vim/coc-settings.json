@@ -3,7 +3,7 @@
   "signature.triggerSignatureWait": 100,
   "diagnostic.enable": true,
   "diagnostic.level": "error",
-  "suggest.autoTrigger": "trigger",
+  "suggest.autoTrigger": "always",
   "suggest.timeout": 1000,
   "coc.preferences.rootPatterns": [".git",".hg",".projections.json","composer.json",".idea"],
   "suggest.completionItemKindLabels": {
