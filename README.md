@@ -3,6 +3,7 @@ Install
 
     $ git clone https://github.com/Nemoden/dotfiles.git && cd dotfiles
     $ ./bootstrap
+    $ vim +PlugInstall +qa
 
 Features
 ---
