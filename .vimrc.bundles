@@ -57,17 +57,13 @@ call plug#begin('~/.vim/plugged')
               \ { 'b': '~/.vimrc.bundles' },
           \ ]
         let g:startify_custom_header = [
-            \ '    ██╗   ██╗██╗███╗   ███╗',
-            \ '    ██║   ██║██║████╗ ████║',
-            \ '    ██║   ██║██║██╔████╔██║',
-            \ '    ╚██╗ ██╔╝██║██║╚██╔╝██║',
-            \ '     ╚████╔╝ ██║██║ ╚═╝ ██║',
-            \ '      ╚═══╝  ╚═╝╚═╝     ╚═╝',
+            \ '    ██╗   ██╗ ██╗ ███╗   ███╗',
+            \ '    ██║   ██║ ██║ ████╗ ████║',
+            \ '    ██║   ██║ ██║ ██╔████╔██║',
+            \ '    ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+            \ '     ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+            \ '      ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
             \ ]
-
-
-
-
 
     Plug 'https://github.com/jmcantrell/vim-virtualenv.git', { 'for': 'python' }
 
@@ -369,6 +365,8 @@ call plug#begin('~/.vim/plugged')
         \ }
         let g:rainbow_active = 1
 
+    Plug 'https://github.com/chrisbra/Colorizer'
+
     Plug 'https://github.com/junegunn/limelight.vim.git'
         let g:limelight_conceal_ctermfg = 'gray'
         let g:limelight_conceal_ctermfg = 240
@@ -379,8 +377,8 @@ call plug#begin('~/.vim/plugged')
         nnoremap <silent> <Space> :Goyo<CR>
         function! s:goyo_enter()
             if executable('tmux') && strlen($TMUX)
-                silent !tmux set status off
-                silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+                call system('tmux set status off')
+                call system('tmux list-panes -F ''\#F'' | grep -q Z || tmux resize-pane -Z')
             endif
             set noshowmode
             set noshowcmd
@@ -390,8 +388,8 @@ call plug#begin('~/.vim/plugged')
 
         function! s:goyo_leave()
             if executable('tmux') && strlen($TMUX)
-                silent !tmux set status on
-                silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+                call system('tmux set status on')
+                call system('tmux list-panes -F ''\#F'' | grep -q Z && tmux resize-pane -Z')
             endif
             set showmode
             set showcmd
