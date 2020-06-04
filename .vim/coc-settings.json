@@ -5,7 +5,8 @@
   "diagnostic.level": "error",
   "suggest.autoTrigger": "always",
   "suggest.timeout": 1000,
-  "coc.preferences.rootPatterns": [".git",".hg",".projections.json","composer.json",".idea"],
+  "phpls.trace.server": "verbose",
+  "coc.preferences.rootPatterns": ["composer.json","composer.lock",".idea","package.json",".git",".hg",".projections.json"],
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
@@ -45,8 +46,7 @@
   "cursors.nextKey": "<C-j>",
   "cursors.previousKey": "<C-k>",
   "coc.preferences.formatOnSaveFiletypes": [
-    "go",
-    "json"
+    "go"
   ],
   "intelephense.licenceKey": "",
   "intelephense.telemetry.enabled": false,

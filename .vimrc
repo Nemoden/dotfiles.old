@@ -1,3 +1,12 @@
+""" LEGEND: """
+""" leader mappings usually in a form of:
+""" <leader> [<subject>] <verb>
+""" EXAPLMES: """
+""" <leader> ct = Comment Toggle
+""" <leader> tt = Tree Toggle
+""" <leader> ff = File Find
+""" <leader> u = Undo
+
 set encoding=utf-8
 
 " leader
@@ -184,6 +193,14 @@ inoremap <silent> <C-c> <esc>
 vnoremap <silent> <leader>s :'<,'>%sort<cr>
 " Reverse sort
 vnoremap <silent> <leader>S :'<,'>%sort!<cr>
+
+" copy name
+nnoremap <silent> ,cn :let @*=expand("%")<CR>:echo "file name copied to the clipboard!"<CR>
+" copy path
+nnoremap <silent> ,cp :let @*=expand("%:p")<CR>:echo "file path copied to the clipboard!"<CR>
+" copy contents
+
+ " nnoremap <silent> ,cc :let @*=expand("%:p")<CR>:echo "file path copied to the clipboard!"<CR>
 
 " source: https://superuser.com/questions/401926/how-to-get-shiftarrows-and-ctrlarrows-working-in-vim-in-tmux
 " make Left, Right, Up, and Down work when in screen/tmux
