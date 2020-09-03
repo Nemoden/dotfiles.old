@@ -29,11 +29,11 @@ call plug#begin('~/.vim/plugged')
       return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
     endfunction
 
-    Plug 'https://github.com/chriskempson/base16-vim.git'
+    Plug 'https://github.com/chriskempson/base16-vim'
 
     " configure airline to reduce unnecessary noise (i.e. % of scroll, etc.)
     " h: airline-default-sections
-    Plug 'https://github.com/vim-airline/vim-airline.git' | Plug 'https://github.com/vim-airline/vim-airline-themes.git'
+    Plug 'https://github.com/vim-airline/vim-airline' | Plug 'https://github.com/vim-airline/vim-airline-themes'
         let g:airline_powerline_fonts = 1
         let g:airline_theme='base16_spacemacs'
         let g:airline#extensions#tabline#enabled = 1
@@ -41,9 +41,10 @@ call plug#begin('~/.vim/plugged')
         let g:airline_extensions = ['branch', 'tabline', 'hunks', 'fugitiveline']
         let g:airline#extensions#disable_rtp_load = 1
 
-    Plug 'https://github.com/tpope/vim-fugitive.git'
+    Plug 'https://github.com/tpope/vim-fugitive'
 
-    Plug 'https://github.com/mhinz/vim-startify.git'
+    Plug 'https://github.com/mhinz/vim-startify'
+        autocmd BufDelete * if empty(filter(tabpagebuflist(), '!buflisted(v:val)')) | Startify | endif
         let g:startify_change_to_dir = 0
         let g:startify_lists = [
               \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
@@ -58,19 +59,19 @@ call plug#begin('~/.vim/plugged')
               \ { 'b': '~/.vimrc.bundles' },
           \ ]
         let g:startify_custom_header = [
-            \ '    ██╗   ██╗ ██╗ ███╗   ███╗',
-            \ '    ██║   ██║ ██║ ████╗ ████║',
-            \ '    ██║   ██║ ██║ ██╔████╔██║',
-            \ '    ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-            \ '     ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-            \ '      ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+            \ '    ██╗   ██╗   ██╗   ███╗   ███╗',
+            \ '    ██║   ██║   ██║   ████╗ ████║',
+            \ '    ██║   ██║   ██║   ██╔████╔██║',
+            \ '    ╚██╗ ██╔╝   ██║   ██║╚██╔╝██║',
+            \ '     ╚████╔╝    ██║   ██║ ╚═╝ ██║',
+            \ '      ╚═══╝     ╚═╝   ╚═╝     ╚═╝',
             \ ]
 
-    Plug 'https://github.com/jmcantrell/vim-virtualenv.git', { 'for': 'python' }
+    Plug 'https://github.com/jmcantrell/vim-virtualenv', { 'for': 'python' }
 
-    " Plug 'https://github.com/terryma/vim-multiple-cursors.git'
+    " Plug 'https://github.com/terryma/vim-multiple-cursors
 
-    Plug 'https://github.com/junegunn/fzf.git', { 'do': { -> fzf#install() } } | Plug 'https://github.com/junegunn/fzf.vim.git'
+    Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } } | Plug 'https://github.com/junegunn/fzf.vim'
         " Todo explore an option of always using :Files (it seems to be just faster compared to :GFiles)
         if exists('g:loaded_fugitive')
             nnoremap <expr> <C-p> fugitive#head() != '' ? ':GFiles! --cached --others --exclude-standard<CR>' : ':Files!<CR>'
@@ -128,8 +129,8 @@ call plug#begin('~/.vim/plugged')
 
         nnoremap <leader>fd Cd .<CR>
 
-    Plug 'https://github.com/preservim/nerdtree.git', { 'on': ['NERDTreeToggle', 'NERDTreeFind', 'NERDTreeCWD'] }
-        \ | Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin.git'
+    Plug 'https://github.com/preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind', 'NERDTreeCWD'] }
+        \ | Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
         noremap <silent> <F2> :NERDTreeToggle <CR>
         " Tree Toggle.
         nnoremap <silent> <leader>tt :NERDTreeToggle <CR>
@@ -140,7 +141,7 @@ call plug#begin('~/.vim/plugged')
 
         let NERDTreeWinSize=40
         let NERDTreeShowHidden=1
-        let NERDTreeQuitOnOpen=1
+        " let NERDTreeQuitOnOpen=1
         let NERDTreeSortHiddenFirst=0
         let NERDTreeAutoDeleteBuffer = 1
         let NERDTreeIgnore=['\.pyc$', '\.bak$', '.git[[dir]]']
@@ -150,10 +151,10 @@ call plug#begin('~/.vim/plugged')
 
         " NERDTress File highlighting
         " https://github.com/preservim/nerdtree/issues/433#issuecomment-92590696
-        function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-            exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-            exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-        endfunction
+        "function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+            "exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+            "exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+        "endfunction
 
         " If the only remaining buffer is NERDTree, exit vim.
         autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -169,11 +170,11 @@ call plug#begin('~/.vim/plugged')
             autocmd FileType nerdtree setlocal concealcursor=nvic
         augroup END
 
-    Plug 'https://github.com/preservim/nerdcommenter.git'
+    Plug 'https://github.com/preservim/nerdcommenter'
         nmap <silent> <C-_> :call NERDComment("n","Invert") <CR>
         nmap <silent> <D-_> :call NERDComment("n","Invert") <CR>
 
-    Plug 'https://github.com/fatih/vim-go.git', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+    Plug 'https://github.com/fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
         autocmd FileType go nmap <leader>gi <Plug>(go-info)
         autocmd FileType go nmap <leader>gd <Plug>(go-def)
         autocmd FileType go nmap <leader>b :GoDefPop<CR>
@@ -181,31 +182,31 @@ call plug#begin('~/.vim/plugged')
         autocmd FileType go nmap <leader>r :GoRename<CR>
         " autocmd FileType go let g:go_auto_type_info = 1
 
-    Plug 'https://github.com/tpope/vim-surround.git'
+    Plug 'https://github.com/tpope/vim-surround'
 
-    Plug 'https://github.com/plasticboy/vim-markdown.git', { 'for': 'markdown' }
+    Plug 'https://github.com/plasticboy/vim-markdown', { 'for': 'markdown' }
 
     " @TODO: find out which one is better works for me (cucumber, etc)
-    " Plug 'https://github.com/junegunn/vim-easy-align.git'
-    " Plug 'https://github.com/godlygeek/tabular.git'
+    " Plug 'https://github.com/junegunn/vim-easy-align'
+    " Plug 'https://github.com/godlygeek/tabular'
 
     " annoying enables table mode while interacting with nerdtree (no idea why, tho)
     " disabled for now
-    "Plug 'https://github.com/dhruvasagar/vim-table-mode.git', { 'for': ['markdown', 'cucumber'] }
+    "Plug 'https://github.com/dhruvasagar/vim-table-mode', { 'for': ['markdown', 'cucumber'] }
         " Options: https://github.com/dhruvasagar/vim-table-mode/blob/master/t/config/options.vim
         "autocmd FileType markdown :TableModeEnable
         "autocmd FileType markdown let g:table_mode_corner="|"
         " tt is taken for Tree Toggle. Don't use t prefix at all.
         "let g:table_mode_disable_mappings = 1
 
-    Plug 'https://github.com/vim-scripts/kwbdi.vim.git'
+    Plug 'https://github.com/vim-scripts/kwbdi.vim'
 
-    Plug 'https://github.com/sheerun/vim-polyglot.git'
+    Plug 'https://github.com/sheerun/vim-polyglot'
 
-    " Plug 'https://github.com/vim-vdebug/vdebug.git'
+    " Plug 'https://github.com/vim-vdebug/vdebug'
 
     " Extensions: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-    Plug 'https://github.com/neoclide/coc.nvim.git', {'branch': 'release'}
+    Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
         if executable('/usr/local/bin/node')
             let g:coc_node_path = '/usr/local/bin/node'
         endif
@@ -280,18 +281,21 @@ call plug#begin('~/.vim/plugged')
         " diagnostics appear/become resolved.
         set signcolumn=yes
 
-    Plug 'https://github.com/airblade/vim-gitgutter.git'
+        " TODO: create a menu / mapping.
+        " https://github.com/neoclide/coc-git
+
+    Plug 'https://github.com/airblade/vim-gitgutter'
 
     "if g:has_async
-        "Plug 'https://github.com/desmap/ale-sensible.git' | Plug 'https://github.com/dense-analysis/ale.git'
+        "Plug 'https://github.com/desmap/ale-sensible' | Plug 'https://github.com/dense-analysis/ale'
             "let b:ale_fixers = {'php': ['phpcbf']}
     "else
-        "Plug 'https://github.com/vim-syntastic/syntastic.git'
+        "Plug 'https://github.com/vim-syntastic/syntastic'
             "autocmd FileType php let g:syntastic_php_checkers = ['php']
     "endif
 
     " Using both since not yet decided which one I prefer better.
-    Plug 'https://github.com/simnalamburt/vim-mundo.git', { 'on': 'MundoToggle' }
+    Plug 'https://github.com/simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
         let g:mundo_width = 40
         let g:mundo_preview_height = 15
         let g:mundo_right = 1
@@ -300,7 +304,7 @@ call plug#begin('~/.vim/plugged')
         let g:mundo_preview_bottom = 1
         nnoremap <silent> <leader>U :MundoToggle <CR>
 
-    Plug 'https://github.com/mbbill/undotree.git', { 'on': 'UndotreeToggle' }
+    Plug 'https://github.com/mbbill/undotree', { 'on': 'UndotreeToggle' }
         nnoremap <silent> <leader>u :UndotreeToggle <CR>
         let g:undotree_WindowLayout = 4
         let g:undotree_SetFocusWhenToggle = 1
@@ -311,7 +315,7 @@ call plug#begin('~/.vim/plugged')
         let s:debug = 1
         let s:debugfile = '/tmp/undotree_debug.log'
 
-    Plug 'https://github.com/liuchengxu/vista.vim.git'
+    " Plug 'https://github.com/liuchengxu/vista.vim'
         ":help vista-commands
 
         " show symbols.
@@ -342,7 +346,7 @@ call plug#begin('~/.vim/plugged')
         let g:vista_ignore_kinds = ['Variable']
         let g:vista_sidebar_width = 40
 
-    Plug 'https://github.com/luochen1990/rainbow.git', { 'for':
+    Plug 'https://github.com/luochen1990/rainbow', { 'for':
             \ [
                 \ 'c',
                 \ 'cpp',
@@ -361,11 +365,11 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'https://github.com/chrisbra/Colorizer'
 
-    Plug 'https://github.com/junegunn/limelight.vim.git'
+    Plug 'https://github.com/junegunn/limelight.vim'
         let g:limelight_conceal_ctermfg = 'gray'
         let g:limelight_conceal_ctermfg = 240
 
-    Plug 'https://github.com/junegunn/goyo.vim.git', { 'on': 'Goyo' }
+    Plug 'https://github.com/junegunn/goyo.vim', { 'on': 'Goyo' }
         let g:goyo_width = 120
         let g:goyo_height = '90%'
         nnoremap <silent> <Space> :Goyo<CR>
@@ -376,7 +380,10 @@ call plug#begin('~/.vim/plugged')
             endif
             set noshowmode
             set noshowcmd
+            set nocursorline
             set scrolloff=999
+            set signcolumn=no
+            GitGutterDisable
             Limelight
         endfunction
 
@@ -388,6 +395,9 @@ call plug#begin('~/.vim/plugged')
             set showmode
             set showcmd
             set scrolloff=9
+            set cursorline
+            set signcolumn=auto
+            GitGutterEnable
             Limelight!
         endfunction
 
@@ -396,7 +406,7 @@ call plug#begin('~/.vim/plugged')
 
     " Inportant: devicons should stay at the bottom, because otherwise, if
     " loaded BEFORE nerdtree + nerdtree git, it would break icons alignment!
-    Plug 'https://github.com/ryanoasis/vim-devicons.git'
+    Plug 'https://github.com/ryanoasis/vim-devicons'
         " after a re-source, fix syntax matching issues (concealing brackets):
         if exists('g:loaded_webdevicons')
             call webdevicons#refresh()

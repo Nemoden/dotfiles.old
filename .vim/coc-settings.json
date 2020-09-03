@@ -52,5 +52,6 @@
   "intelephense.telemetry.enabled": false,
   "intelephense.completion.triggerParameterHints": false,
   "intelephense.format.enable": false,
-  "intelephense.trace.server": "off"
+  "intelephense.trace.server": "off",
+  "git.enableGutters": false
 }

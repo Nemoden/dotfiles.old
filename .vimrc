@@ -33,6 +33,11 @@ set mousehide                   " dont show mouse while entering text
 set backspace=2                 " make backspace work as expected
 set updatetime=300              " updatetime of 4000 is too long
 set laststatus=2                " always show statusline
+" source: https://www.reddit.com/r/vim/comments/2391u5/delay_while_using_esc_to_exit_insert_mode/
+set ttimeout
+set ttimeoutlen=10
+set timeoutlen=3000
+
 
 """ SEARCH
 set incsearch                   " search while typing
@@ -178,6 +183,8 @@ nnoremap <silent> <C-Left> :vertical resize +5<cr>
 nnoremap <silent> <C-Right> :vertical resize -5<cr>
 nnoremap <silent> <C-Up> :resize +2<cr>
 nnoremap <silent> <C-Down> :resize -2<cr>
+nnoremap <leader>th <C-w>t<C-w>H
+nnoremap <leader>tk <C-w>t<C-w>K
 
 function! GetPwd()
   return system('pwd')
@@ -222,3 +229,32 @@ nnoremap <leader>dd :%bd\|e#\|bd#<cr>
 
 " :w!! asks for sudo password to modify system files
 cmap w!! %!sudo tee > /dev/null %
+
+function! DoPrettyXML()
+  " save the filetype so we can restore it later
+  let l:origft = &ft
+  set ft=
+  " delete the xml header if it exists. This will
+  " permit us to surround the document with fake tags
+  " without creating invalid xml.
+  1s/<?xml .*?>//e
+  " insert fake tags around the entire document.
+  " This will permit us to pretty-format excerpts of
+  " XML that may contain multiple top-level elements.
+  0put ='<PrettyXML>'
+  $put ='</PrettyXML>'
+  silent %!xmllint --format -
+  " xmllint will insert an <?xml?> header. it's easy enough to delete
+  " if you don't want it.
+  " delete the fake tags
+  2d
+  $d
+  " restore the 'normal' indentation, which is one extra level
+  " too deep due to the extra tags we wrapped around the document.
+  silent %<
+  " back to home
+  1
+  " restore the filetype
+  exe "set ft=" . l:origft
+endfunction
+command! PrettyXML call DoPrettyXML()
