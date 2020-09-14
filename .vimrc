@@ -202,7 +202,7 @@ vnoremap <silent> <leader>s :'<,'>%sort<cr>
 vnoremap <silent> <leader>S :'<,'>%sort!<cr>
 
 " copy name
-nnoremap <silent> ,cn :let @*=expand("%")<CR>:echo "file name copied to the clipboard!"<CR>
+nnoremap <silent> ,cn :let @*=expand("%:.")<CR>:echo "file name copied to the clipboard!"<CR>
 " copy path
 nnoremap <silent> ,cp :let @*=expand("%:p")<CR>:echo "file path copied to the clipboard!"<CR>
 " copy contents
@@ -258,3 +258,7 @@ function! DoPrettyXML()
   exe "set ft=" . l:origft
 endfunction
 command! PrettyXML call DoPrettyXML()
+
+if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif
