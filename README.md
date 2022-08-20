@@ -1,7 +1,9 @@
+[new dotfiles](https://github.com/Nemoden/dotfiles)
+
 Install
 ---
 
-    $ git clone https://github.com/Nemoden/dotfiles.git && cd dotfiles
+    $ git clone https://github.com/Nemoden/dotfiles.old.git && cd dotfiles
     $ ./bootstrap
     $ vim +PlugInstall +qa
 
